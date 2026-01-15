@@ -156,7 +156,7 @@ export const PROJECTS: Project[] = [
     longDescription:
       "An intelligent automotive diagnostics system that leverages Retrieval-Augmented Generation (RAG) to query car manuals and diagnostic information. Uses ASR-LLM-TTS (Automatic Speech Recognition, Large Language Model, Text-to-Speech) pipeline to process vehicle issues, retrieve relevant manual sections, and provide audio-guided diagnostic assistance. Enables mechanics and car owners to quickly identify problems and access repair information through natural language queries.",
     tech: ["RAG", "LLM", "TTS", "Vector DB", "Python", "ASR"],
-    link: "",
+    link: "https://friday.taktora.ai",
     image: "/friday/friday_1.png",
     media: [
       { type: "image", src: "/friday/friday_1.png" },
