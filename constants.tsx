@@ -32,7 +32,7 @@ export interface Location {
 export const LOCATIONS: Location[] = [
   // Main Education/Work Line
   { id: "macau", name: "Macau", label: "Hometown", description: "Where I was born and raised.", line: "main" },
-  { id: "zhuhai", name: "Zhuhai", label: "Free food", description: "Where I hanged out the most often.", line: "main" },
+  { id: "zhuhai", name: "Zhuhai", label: "HomeTown", description: "Where I hanged out the most often.", line: "main" },
   {
     id: "uk",
     name: "Newcastle",
