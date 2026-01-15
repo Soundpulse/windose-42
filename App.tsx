@@ -540,7 +540,7 @@ const App: React.FC = () => {
             content = <StreamApp />;
             break;
           case "research":
-            content = <ResearchApp />;
+            content = <ResearchApp onOpenLink={handleOpenLink} />;
             break;
           default:
             content = <div className="p-4">Empty</div>;
