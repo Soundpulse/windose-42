@@ -69,13 +69,28 @@ const AchievementsApp: React.FC = () => {
           <h1 className="text-3xl font-light tracking-tighter">UNLOCKED_MILESTONES</h1>
         </div>
 
+        <div className="group relative border border-gray-800 p-6 hover:border-white transition-colors bg-black/50 backdrop-blur-sm">
+          <div className="absolute -top-2 -left-2 w-4 h-4 border-l border-t border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+
+          <div className="flex justify-between items-start mb-4">
+            <span className="text-[10px] text-gray-300">◆ 0x01</span>
+            <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">MEDIA FEATURE</span>
+          </div>
+          <h3 className="text-lg font-light mb-2">MYEIC Magazine Feature</h3>
+          <p className="text-xs text-white leading-relaxed uppercase tracking-tight">
+            Featured in 《創孵世代》Issue 41 | Macau Youth Entrepreneurship Incubation Center.
+          </p>
+          <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2023.06.21</div>
+        </div>
+
         <div className="space-y-8">
           <div className="group relative border border-gray-800 p-6 hover:border-white transition-colors bg-black/50 backdrop-blur-sm">
             <div className="absolute -top-2 -left-2 w-4 h-4 border-l border-t border-white opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x01</span>
+              <span className="text-[10px] text-gray-300">◆ 0x02</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP AWARD</span>
             </div>
             <h3 className="text-lg font-light mb-2">Techstars Startup Weekend</h3>
@@ -90,7 +105,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x02</span>
+              <span className="text-[10px] text-gray-300">◆ 0x03</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STUDENT REP</span>
             </div>
             <h3 className="text-lg font-light mb-2">NCL+ Advanced Award</h3>
@@ -105,7 +120,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x03</span>
+              <span className="text-[10px] text-gray-300">◆ 0x04</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">ROBOTICS</span>
             </div>
             <h3 className="text-lg font-light mb-2">Robotics Innovation</h3>
@@ -120,7 +135,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x04</span>
+              <span className="text-[10px] text-gray-300">◆ 0x05</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">GREGGED</span>
             </div>
             <h3 className="text-lg font-light mb-2">GregTech: New Horizons Stargate Completion (MP)</h3>
@@ -137,7 +152,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x05</span>
+              <span className="text-[10px] text-gray-300">◆ 0x06</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">CLICKING CIRCLES</span>
             </div>
             <h3 className="text-lg font-light mb-2">Osu! #1 Macau</h3>
