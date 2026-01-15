@@ -27,6 +27,8 @@ export interface ProjectMedia {
   src: string;
 }
 
+export type ProjectStatus = "LIVE" | "ARCHIVED" | "MVP" | "PROTOTYPE" | "RESEARCH";
+
 export interface Project {
   id: string;
   title: string;
@@ -36,4 +38,5 @@ export interface Project {
   link: string;
   image: string;
   media?: ProjectMedia[];
+  status: ProjectStatus;
 }

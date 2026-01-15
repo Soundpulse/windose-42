@@ -5,9 +5,10 @@ import { Project, ProjectMedia } from "../../types";
 interface MediaGalleryProps {
   media: ProjectMedia[];
   title: string;
+  status?: string;
 }
 
-const MediaGallery: React.FC<MediaGalleryProps> = ({ media, title }) => {
+const MediaGallery: React.FC<MediaGalleryProps> = ({ media, title, status }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
@@ -145,6 +146,13 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, title }) => {
         </div>
       )}
 
+      {/* Status badge */}
+      {status && (
+        <div className="absolute top-2 left-2 text-[9px] font-mono bg-white text-black px-2 py-0.5 tracking-wider uppercase">
+          {status}
+        </div>
+      )}
+
       {/* Media type badge */}
       <div className="absolute top-2 right-2 text-[9px] font-mono bg-black/70 text-gray-300 px-2 py-0.5 tracking-wider">
         {isVideo ? "VIDEO" : "IMG"} {currentIndex + 1}/{media.length}
@@ -172,7 +180,7 @@ const ProjectViewApp: React.FC<ProjectViewAppProps> = ({ project }) => {
     <div className="h-full overflow-y-auto">
       {/* Media Gallery */}
       {project.media && project.media.length > 0 && (
-        <MediaGallery media={project.media} title={project.title} />
+        <MediaGallery media={project.media} title={project.title} status={project.status} />
       )}
 
       {/* Content */}

@@ -6,9 +6,10 @@ import { ProjectMedia } from "../../types";
 interface MediaGalleryProps {
   media: ProjectMedia[];
   title: string;
+  status?: string;
 }
 
-const MediaGallery: React.FC<MediaGalleryProps> = ({ media, title }) => {
+const MediaGallery: React.FC<MediaGalleryProps> = ({ media, title, status }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
@@ -155,6 +156,13 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, title }) => {
         </div>
       )}
 
+      {/* Status badge */}
+      {status && (
+        <div className="absolute top-1.5 left-1.5 text-[7px] font-mono bg-white text-black px-1.5 py-0.5 tracking-wider uppercase">
+          {status}
+        </div>
+      )}
+
       {/* Media type badge */}
       <div className="absolute top-1.5 right-1.5 text-[7px] font-mono bg-black/70 text-gray-300 px-1.5 py-0.5 tracking-wider">
         {isVideo ? "VIDEO" : "IMG"} {currentIndex + 1}/{media.length}
@@ -193,7 +201,7 @@ const ProjectsApp: React.FC<ProjectsAppProps> = ({ onOpenProject }) => {
               className="border border-gray-800 bg-black hover:border-gray-600 transition-all flex flex-col cursor-pointer group">
               {/* Media Gallery */}
               {project.media && project.media.length > 0 && (
-                <MediaGallery media={project.media} title={project.title} />
+                <MediaGallery media={project.media} title={project.title} status={project.status} />
               )}
 
               {/* Content */}

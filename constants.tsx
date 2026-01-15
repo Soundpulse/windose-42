@@ -129,6 +129,7 @@ export const PROJECTS: Project[] = [
     link: "",
     image: "/onewaytools/onewaytools.png",
     media: [{ type: "image", src: "/onewaytools/onewaytools.png" }],
+    status: "ARCHIVED",
   },
   {
     id: "lora_transfer",
@@ -146,6 +147,23 @@ export const PROJECTS: Project[] = [
       { type: "video", src: "/lora_transfer/neg.mp4" },
       { type: "video", src: "/lora_transfer/mixed.mp4" },
     ],
+    status: "RESEARCH",
+  },
+  {
+    id: "friday",
+    title: "Friday @ Taktora",
+    description: "AI-powered car manual diagnostics using RAG and ASR-LLM-TTS flow.",
+    longDescription:
+      "An intelligent automotive diagnostics system that leverages Retrieval-Augmented Generation (RAG) to query car manuals and diagnostic information. Uses ASR-LLM-TTS (Automatic Speech Recognition, Large Language Model, Text-to-Speech) pipeline to process vehicle issues, retrieve relevant manual sections, and provide audio-guided diagnostic assistance. Enables mechanics and car owners to quickly identify problems and access repair information through natural language queries.",
+    tech: ["RAG", "LLM", "TTS", "Vector DB", "Python", "ASR"],
+    link: "",
+    image: "/friday/friday_1.png",
+    media: [
+      { type: "image", src: "/friday/friday_1.png" },
+      { type: "image", src: "/friday/friday_2.png" },
+      { type: "image", src: "/friday/friday_3.png" },
+    ],
+    status: "PROTOTYPE",
   },
   {
     id: "misff",
@@ -162,6 +180,7 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/misff/misff_3.png" },
       { type: "image", src: "/misff/misff_4.png" },
     ],
+    status: "ARCHIVED",
   },
   {
     id: "getgo",
@@ -177,6 +196,7 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/getgo/getgo_2.png" },
       { type: "image", src: "/getgo/getgo_3.png" },
     ],
+    status: "LIVE",
   },
   {
     id: "doctail",
@@ -192,6 +212,7 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/doctail/doctail_2.png" },
       { type: "image", src: "/doctail/doctail_3.png" },
     ],
+    status: "MVP",
   },
   {
     id: "taktora",
@@ -207,6 +228,7 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/taktora/taktora_2.png" },
       { type: "image", src: "/taktora/taktora_3.png" },
     ],
+    status: "LIVE",
   },
   {
     id: "propacks",
@@ -224,6 +246,7 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/propacks/inventory.png" },
       { type: "image", src: "/propacks/order.png" },
     ],
+    status: "LIVE",
   },
   {
     id: "autostitch",
@@ -241,6 +264,7 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/autostitch/yosemite3_warp.jpg" },
       { type: "image", src: "/autostitch/yosemite4_warp.jpg" },
     ],
+    status: "RESEARCH",
   },
   {
     id: "dqn",
@@ -252,6 +276,7 @@ export const PROJECTS: Project[] = [
     link: "",
     image: "/dqn/dqn.png",
     media: [{ type: "image", src: "/dqn/dqn.png" }],
+    status: "RESEARCH",
   },
   {
     id: "timeseries",
@@ -263,6 +288,7 @@ export const PROJECTS: Project[] = [
     link: "",
     image: "/time series/time-series.png",
     media: [{ type: "image", src: "/time series/time-series.png" }],
+    status: "RESEARCH",
   },
   {
     id: "projectschart",
@@ -274,6 +300,7 @@ export const PROJECTS: Project[] = [
     link: "",
     image: "/projectschart/Using ProjectsChart.mp4",
     media: [{ type: "video", src: "/projectschart/Using ProjectsChart.mp4" }],
+    status: "PROTOTYPE",
   },
   {
     id: "webbit-chat",
@@ -288,6 +315,7 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/webbit-chat/chat_1.png" },
       { type: "image", src: "/webbit-chat/chat_2.png" },
     ],
+    status: "LIVE",
   },
   {
     id: "coresda-esg",
@@ -302,5 +330,6 @@ export const PROJECTS: Project[] = [
       { type: "image", src: "/hovione/hovione_1.png" },
       { type: "image", src: "/hovione/hovione_2.png" },
     ],
+    status: "ARCHIVED",
   },
 ];
