@@ -1,0 +1,22 @@
+
+import React from 'react';
+
+export type AppID = 'about' | 'projects' | 'terminal' | 'stats' | 'chat' | 'settings' | 'go_out' | 'achievements' | 'stack';
+
+export interface WindowState {
+  id: AppID;
+  title: string;
+  isOpen: boolean;
+  isMinimized: boolean;
+  zIndex: number;
+  icon: React.ReactNode;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  tech: string[];
+  link: string;
+  image: string;
+}

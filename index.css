@@ -1,0 +1,431 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   NEEDY BOY OVERDOSE - Clean Y2K Black
+   Clean. Elegant. Broken. Retro Y2K in pure black.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Pure Black Palette */
+  --void: #000000;
+  --dark: #0a0a0a;
+  --panel: #111111;
+  --elevated: #1a1a1a;
+  --border: #2a2a2a;
+  --border-light: #333333;
+  
+  /* Text */
+  --white: #ffffff;
+  --gray-100: #f0f0f0;
+  --gray-300: #a0a0a0;
+  --gray-500: #666666;
+  --gray-700: #444444;
+  --gray-900: #222222;
+  
+  /* Accent - Keep it subtle */
+  --accent: #ffffff;
+  --danger: #ff4444;
+  
+  /* Typography */
+  --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--void);
+  color: var(--white);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+::selection {
+  background: var(--white);
+  color: var(--void);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Y2K GLITCH ANIMATIONS - Subtle & Elegant
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes subtle-glitch {
+  0%, 95%, 100% { 
+    transform: translate(0); 
+    opacity: 1;
+  }
+  96% { 
+    transform: translate(-2px, 0); 
+    opacity: 0.8;
+  }
+  97% { 
+    transform: translate(2px, 0);
+  }
+  98% { 
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flicker-subtle {
+  0%, 97%, 100% { opacity: 1; }
+  98% { opacity: 0.7; }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes blink-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes loading {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes broken-text {
+  0%, 90%, 100% { 
+    letter-spacing: normal;
+    filter: none;
+  }
+  92% { 
+    letter-spacing: 0.3em;
+    filter: blur(0.5px);
+  }
+  94% {
+    letter-spacing: -0.05em;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLLBAR - Minimal Y2K
+   ═══════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+.retro-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) var(--dark);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════ */
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-glitch {
+  animation: subtle-glitch 5s infinite;
+}
+
+.text-broken {
+  animation: broken-text 8s infinite;
+}
+
+.text-flicker {
+  animation: flicker-subtle 3s infinite;
+}
+
+.text-xs { font-size: 10px; }
+.text-sm { font-size: 12px; }
+.text-md { font-size: 14px; }
+.text-lg { font-size: 18px; }
+.text-xl { font-size: 24px; }
+
+.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WINDOWS - Clean with Broken Edge
+   ═══════════════════════════════════════════════════════════ */
+
+.window {
+  background: var(--dark);
+  border: 1px solid var(--border-light);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 var(--border);
+}
+
+.window-focused {
+  border-color: var(--white);
+  box-shadow: 
+    0 0 0 1px var(--white),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.title-bar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Window Buttons - ♡ ◇ ✕ */
+.win-btn {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all 0.1s;
+  font-size: 10px;
+}
+
+.win-btn:hover {
+  color: var(--white);
+  border-color: var(--border-light);
+}
+
+.win-btn-close:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════ */
+
+.btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--gray-300);
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  background: var(--white);
+  color: var(--void);
+  border-color: var(--white);
+}
+
+.btn-ghost {
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background: var(--elevated);
+  color: var(--white);
+  border-color: var(--border-light);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARDS & PANELS
+   ═══════════════════════════════════════════════════════════ */
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 16px;
+}
+
+.card-hover:hover {
+  border-color: var(--white);
+}
+
+.panel {
+  background: var(--dark);
+  border: 1px solid var(--border);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROGRESS BARS & METERS
+   ═══════════════════════════════════════════════════════════ */
+
+.meter {
+  height: 4px;
+  background: var(--gray-900);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--white);
+  transition: width 0.3s ease;
+}
+
+.meter-danger .meter-fill {
+  background: var(--danger);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   OVERLAYS & EFFECTS
+   ═══════════════════════════════════════════════════════════ */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+.scan-line {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.03);
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ICONS & DECORATIVE
+   ═══════════════════════════════════════════════════════════ */
+
+.icon-container {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+
+.icon-container:hover {
+  background: var(--white);
+  color: var(--void);
+  border-color: var(--white);
+}
+
+.float {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TAGS & BADGES
+   ═══════════════════════════════════════════════════════════ */
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.tag-active {
+  background: var(--white);
+  color: var(--void);
+  border-color: var(--white);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INPUTS
+   ═══════════════════════════════════════════════════════════ */
+
+input, textarea {
+  background: var(--void);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--white);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--gray-700);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SPECIAL STATES
+   ═══════════════════════════════════════════════════════════ */
+
+.broken {
+  animation: subtle-glitch 3s infinite;
+}
+
+.elegant {
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* Hidden rickroll trigger zones */
+.easter-egg {
+  cursor: help;
+}
+
+.easter-egg:active {
+  animation: subtle-glitch 0.1s;
+}
