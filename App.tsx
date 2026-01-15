@@ -209,11 +209,21 @@ const RhythmBackground: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  const [windows, setWindows] = useState<WindowState[]>(INITIAL_WINDOWS);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [windows, setWindows] = useState<WindowState[]>(() => {
+    // On mobile, don't show System window on start
+    const initialWindows = [...INITIAL_WINDOWS];
+    if (window.innerWidth < 768) {
+      const statsIndex = initialWindows.findIndex((w) => w.id === "stats");
+      if (statsIndex !== -1) {
+        initialWindows[statsIndex] = { ...initialWindows[statsIndex], isOpen: false };
+      }
+    }
+    return initialWindows;
+  });
   const [maxZ, setMaxZ] = useState(200);
   const [booted, setBooted] = useState(false);
   const [bootPhase, setBootPhase] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [hoveredLocationId, setHoveredLocationId] = useState<string | null>(null);
   const [confirmingLink, setConfirmingLink] = useState<string | null>(null);
@@ -232,7 +242,14 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      // Ensure System window is closed on mobile
+      if (mobile) {
+        setWindows((prev) => prev.map((w) => (w.id === "stats" ? { ...w, isOpen: false } : w)));
+      }
+    };
     checkMobile();
     window.addEventListener("resize", checkMobile);
 
@@ -364,6 +381,8 @@ const App: React.FC = () => {
       {/* App Windows */}
       {windows.map((win) => {
         if (!win.isOpen) return null;
+        // Don't show System window on mobile
+        if (win.id === "stats" && isMobile) return null;
 
         let content;
         switch (win.id) {
