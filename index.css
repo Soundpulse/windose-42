@@ -3,7 +3,7 @@
    Clean. Elegant. Broken. Retro Y2K in pure black.
    ════════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap");
 
 :root {
   /* Pure Black Palette */
@@ -13,7 +13,7 @@
   --elevated: #1a1a1a;
   --border: #2a2a2a;
   --border-light: #333333;
-  
+
   /* Text */
   --white: #ffffff;
   --gray-100: #f0f0f0;
@@ -21,14 +21,14 @@
   --gray-500: #666666;
   --gray-700: #444444;
   --gray-900: #222222;
-  
+
   /* Accent - Keep it subtle */
   --accent: #ffffff;
   --danger: #ff4444;
-  
+
   /* Typography */
-  --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
-  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-mono: "Space Mono", "JetBrains Mono", monospace;
+  --font-sans: "Inter", -apple-system, sans-serif;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -59,54 +59,83 @@ body {
    ═══════════════════════════════════════════════════════════ */
 
 @keyframes subtle-glitch {
-  0%, 95%, 100% { 
-    transform: translate(0); 
+  0%,
+  95%,
+  100% {
+    transform: translate(0);
     opacity: 1;
   }
-  96% { 
-    transform: translate(-2px, 0); 
+  96% {
+    transform: translate(-2px, 0);
     opacity: 0.8;
   }
-  97% { 
+  97% {
     transform: translate(2px, 0);
   }
-  98% { 
+  98% {
     transform: translate(0);
     opacity: 1;
   }
 }
 
 @keyframes flicker-subtle {
-  0%, 97%, 100% { opacity: 1; }
-  98% { opacity: 0.7; }
+  0%,
+  97%,
+  100% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0.7;
+  }
 }
 
 @keyframes scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
 }
 
 @keyframes float-gentle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 @keyframes blink-cursor {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes loading {
-  0% { width: 0%; }
-  100% { width: 100%; }
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 @keyframes broken-text {
-  0%, 90%, 100% { 
+  0%,
+  90%,
+  100% {
     letter-spacing: normal;
     filter: none;
   }
-  92% { 
+  92% {
     letter-spacing: 0.3em;
     filter: blur(0.5px);
   }
@@ -116,9 +145,23 @@ body {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-  20%, 40%, 60%, 80% { transform: translateX(10px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -167,11 +210,21 @@ body {
   animation: flicker-subtle 3s infinite;
 }
 
-.text-xs { font-size: 10px; }
-.text-sm { font-size: 12px; }
-.text-md { font-size: 14px; }
-.text-lg { font-size: 18px; }
-.text-xl { font-size: 24px; }
+.text-xs {
+  font-size: 10px;
+}
+.text-sm {
+  font-size: 12px;
+}
+.text-md {
+  font-size: 14px;
+}
+.text-lg {
+  font-size: 18px;
+}
+.text-xl {
+  font-size: 24px;
+}
 
 .uppercase {
   text-transform: uppercase;
@@ -185,16 +238,12 @@ body {
 .window {
   background: var(--dark);
   border: 1px solid var(--border-light);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 var(--border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 var(--border);
 }
 
 .window-focused {
   border-color: var(--white);
-  box-shadow: 
-    0 0 0 1px var(--white),
-    0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px var(--white), 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .title-bar {
@@ -338,12 +387,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 9997;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 0%,
-    transparent 60%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -396,7 +440,8 @@ body {
    INPUTS
    ═══════════════════════════════════════════════════════════ */
 
-input, textarea {
+input,
+textarea {
   background: var(--void);
   border: 1px solid var(--border);
   color: var(--white);
@@ -405,12 +450,14 @@ input, textarea {
   font-size: 12px;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: var(--white);
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: var(--gray-700);
 }
 
@@ -434,4 +481,46 @@ input::placeholder, textarea::placeholder {
 
 .easter-egg:active {
   animation: subtle-glitch 0.1s;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SUEDE IN THE RAIN - Glitch Text
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes suede-flash {
+  0%,
+  92%,
+  100% {
+    opacity: 0.4;
+    transform: translateX(0);
+    filter: none;
+  }
+  93% {
+    opacity: 1;
+    transform: translateX(-2px);
+    filter: blur(0.5px);
+    color: #9d4edd;
+  }
+  94% {
+    opacity: 0.1;
+    transform: translateX(3px);
+  }
+  95% {
+    opacity: 1;
+    transform: translateX(-1px);
+    color: #44ff44;
+  }
+  96% {
+    opacity: 0.6;
+    transform: translateX(0);
+    filter: none;
+  }
+  97% {
+    opacity: 0.2;
+  }
+}
+
+.suede-glitch {
+  animation: suede-flash 4s infinite;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.3), 2px 0 0 rgba(157, 78, 221, 0.1), -2px 0 0 rgba(0, 255, 0, 0.1);
 }

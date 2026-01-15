@@ -26,7 +26,10 @@ import GoOutApp from "./components/apps/GoOutApp";
 import AchievementsApp from "./components/apps/AchievementsApp";
 import StackApp from "./components/apps/StackApp";
 import StreamApp from "./components/apps/StreamApp";
+import ProjectViewApp from "./components/apps/ProjectViewApp";
 import ExternalLinkModal from "./components/ExternalLinkModal";
+import { Project } from "./types";
+import { PROJECTS } from "./constants";
 
 const RICKROLL_URL = "https://www.youtube.com/watch?v=siM9g9dpkZg";
 
@@ -228,6 +231,7 @@ const App: React.FC = () => {
   const [hoveredLocationId, setHoveredLocationId] = useState<string | null>(null);
   const [confirmingLink, setConfirmingLink] = useState<string | null>(null);
   const [isStreamMode, setIsStreamMode] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const hoveredLocation = LOCATIONS.find((l) => l.id === hoveredLocationId);
 
@@ -343,6 +347,26 @@ const App: React.FC = () => {
     setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, isMinimized: true } : w)));
   }, []);
 
+  const openProjectView = useCallback(
+    (projectId: string) => {
+      const project = PROJECTS.find((p) => p.id === projectId);
+      if (project) {
+        setSelectedProject(project);
+        // Update window title and open it
+        setWindows((prev) =>
+          prev.map((w) => {
+            if (w.id === "project_view") {
+              return { ...w, isOpen: true, isMinimized: false, zIndex: maxZ + 1, title: project.title };
+            }
+            return w;
+          })
+        );
+        setMaxZ((prev) => prev + 1);
+      }
+    },
+    [maxZ]
+  );
+
   // Boot Screen
   if (!booted) {
     return (
@@ -443,7 +467,7 @@ const App: React.FC = () => {
         <DesktopIcon icon={<Layers size={20} />} label="Skills" onClick={() => openApp("stack")} />
         <DesktopIcon icon={<Terminal size={20} />} label="Terminal" onClick={() => openApp("terminal")} />
         <DesktopIcon icon={<MessageCircle size={20} />} label="Messages" onClick={() => openApp("chat")} />
-        <DesktopIcon icon={<Map size={20} />} label="Travel Log" onClick={() => openApp("go_out")} />
+        <DesktopIcon icon={<Map size={20} />} label="touch grass" onClick={() => openApp("go_out")} />
         <DesktopIcon
           icon={<Github size={20} />}
           label="GitHub"
@@ -466,6 +490,13 @@ const App: React.FC = () => {
         />
       </div>
 
+      {/* Suede in the Rain - Bottom Right Corner (PC only) */}
+      <div className="hidden md:block fixed bottom-16 right-6 z-[10]">
+        <div className="suede-glitch font-mono text-[15px] tracking-[0.2em] text-gray-600 uppercase select-none">
+          Suede in the Rain
+        </div>
+      </div>
+
       {/* App Windows */}
       {windows.map((win) => {
         if (!win.isOpen) return null;
@@ -478,7 +509,10 @@ const App: React.FC = () => {
             content = <AboutApp />;
             break;
           case "projects":
-            content = <ProjectsApp />;
+            content = <ProjectsApp onOpenProject={openProjectView} />;
+            break;
+          case "project_view":
+            content = <ProjectViewApp project={selectedProject} />;
             break;
           case "terminal":
             content = <TerminalApp onClose={() => closeApp("terminal")} onOpenLink={handleOpenLink} />;

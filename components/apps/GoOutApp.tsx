@@ -29,7 +29,7 @@ const POSITIONS: Record<string, Point> = {
   guilin: { x: 50, y: 115 },
   yunnan: { x: 25, y: 135 },
   chongqing: { x: 10, y: 135 },
-  tibet: { x: 0, y: 135 },
+  tibet: { x: -10, y: 135 },
 
   asia_elb_k: { x: 20, y: 0 },
   korea: { x: 0, y: 20 },
@@ -50,11 +50,11 @@ const POSITIONS: Record<string, Point> = {
   london: { x: 100, y: 100 },
   france: { x: 100, y: 110 },
   poland: { x: 85, y: 110 },
-  eur_elb_p: { x: 70, y: 110 },
-  portugal: { x: 70, y: 120 },
-  spain: { x: 70, y: 140 },
-  italy: { x: 55, y: 135 },
-  vatican: { x: 40, y: 135 },
+  eur_elb_p: { x: 75, y: 110 },
+  portugal: { x: 75, y: 120 },
+  spain: { x: 75, y: 140 },
+  italy: { x: 55, y: 130 },
+  vatican: { x: 55, y: 145 },
 
   buffalo: { x: 170, y: 0 },
   ec_elb_b: { x: 150, y: 0 },
@@ -194,7 +194,7 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
       ctx.clearRect(0, 0, width, height);
 
       const currentHover = hoveredLocRef.current;
-      const scale = Math.min(width / (bounds.width || 1), height / (bounds.height || 1)) * 0.75;
+      const scale = Math.min(width / (bounds.width || 1), height / (bounds.height || 1)) * 0.7;
       const offsetX = (width - bounds.width * scale) / 2 - bounds.minX * scale;
       const offsetY = (height - bounds.height * scale) / 2 - bounds.minY * scale;
 
@@ -295,7 +295,8 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
           ctx.fillRect((12 * scale) / 5 - 2, -fontSize / 2 - 2, metrics.width + 4, fontSize + 4);
 
           ctx.fillStyle = "#fff";
-          ctx.fillText(text, (12 * scale) / 5, fontSize / 3);
+          ctx.textBaseline = "middle";
+          ctx.fillText(text, (12 * scale) / 5, 0);
           ctx.restore();
         }
       });
@@ -325,7 +326,7 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
     const rect = canvas.getBoundingClientRect();
     const mx = e.clientX - rect.left,
       my = e.clientY - rect.top;
-    const scale = Math.min(canvas.width / (bounds.width || 1), canvas.height / (bounds.height || 1)) * 0.75;
+    const scale = Math.min(canvas.width / (bounds.width || 1), canvas.height / (bounds.height || 1)) * 0.7;
     const ox = (canvas.width - bounds.width * scale) / 2 - bounds.minX * scale;
     const oy = (canvas.height - bounds.height * scale) / 2 - bounds.minY * scale;
 
@@ -356,7 +357,7 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
           <div className="p-1 bg-white">
             <Globe size={14} className="text-black" />
           </div>
-          <h2 className="text-sm font-mono tracking-[0.2em] text-white uppercase font-bold">Travel_Log_Matrix</h2>
+          <h2 className="text-sm font-mono tracking-[0.2em] text-white uppercase font-bold">Travel_Flow_v4.2</h2>
         </div>
         <div className="text-[10px] font-mono text-gray-400 tracking-wider uppercase">
           {LOCATIONS.length} Active Nodes

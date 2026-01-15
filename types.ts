@@ -10,7 +10,8 @@ export type AppID =
   | "go_out"
   | "achievements"
   | "stack"
-  | "stream";
+  | "stream"
+  | "project_view";
 
 export interface WindowState {
   id: AppID;
@@ -21,11 +22,18 @@ export interface WindowState {
   icon: React.ReactNode;
 }
 
+export interface ProjectMedia {
+  type: "image" | "video";
+  src: string;
+}
+
 export interface Project {
   id: string;
   title: string;
   description: string;
+  longDescription?: string;
   tech: string[];
   link: string;
   image: string;
+  media?: ProjectMedia[];
 }
