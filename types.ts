@@ -11,7 +11,8 @@ export type AppID =
   | "achievements"
   | "stack"
   | "stream"
-  | "project_view";
+  | "project_view"
+  | "research";
 
 export interface WindowState {
   id: AppID;

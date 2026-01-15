@@ -11,6 +11,7 @@ import {
   Power,
   Trophy,
   Layers,
+  FileText,
 } from "lucide-react";
 import { INITIAL_WINDOWS, LOCATIONS } from "./constants";
 import { AppID, WindowState } from "./types";
@@ -27,6 +28,7 @@ import AchievementsApp from "./components/apps/AchievementsApp";
 import StackApp from "./components/apps/StackApp";
 import StreamApp from "./components/apps/StreamApp";
 import ProjectViewApp from "./components/apps/ProjectViewApp";
+import ResearchApp from "./components/apps/ResearchApp";
 import ExternalLinkModal from "./components/ExternalLinkModal";
 import { Project } from "./types";
 import { PROJECTS } from "./constants";
@@ -469,6 +471,7 @@ const App: React.FC = () => {
         <DesktopIcon icon={<Terminal size={20} />} label="Terminal" onClick={() => openApp("terminal")} />
         <DesktopIcon icon={<MessageCircle size={20} />} label="Messages" onClick={() => openApp("chat")} />
         <DesktopIcon icon={<Map size={20} />} label="touch grass" onClick={() => openApp("go_out")} />
+        <DesktopIcon icon={<FileText size={20} />} label="Research" onClick={() => openApp("research")} />
         <DesktopIcon
           icon={<Github size={20} />}
           label="GitHub"
@@ -535,6 +538,9 @@ const App: React.FC = () => {
             break;
           case "stream":
             content = <StreamApp />;
+            break;
+          case "research":
+            content = <ResearchApp />;
             break;
           default:
             content = <div className="p-4">Empty</div>;
