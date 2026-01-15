@@ -1,5 +1,4 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 interface TerminalAppProps {
   onClose?: () => void;
@@ -8,89 +7,94 @@ interface TerminalAppProps {
 
 const TerminalApp: React.FC<TerminalAppProps> = ({ onClose, onOpenLink }) => {
   const [history, setHistory] = useState<string[]>([
-    'Windose Kernel v42.0.0 Initialized.',
-    'User authorized: SOUNDPULSE',
-    'Type "help" for a list of available commands.'
+    "Windose Kernel v42.0.0 Initialized.",
+    "User authorized: SOUNDPULSE",
+    'Type "help" for a list of available commands.',
   ]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const handleCommand = (e: React.FormEvent) => {
     e.preventDefault();
     const cmdInput = input.trim();
     const cmd = cmdInput.toLowerCase();
-    const parts = cmd.split(' ');
+    const parts = cmd.split(" ");
     const baseCmd = parts[0];
 
     if (!cmd) return;
 
+    // Check for rm -rf and redirect to rickroll without popup
+    if (cmd.includes("rm -rf") || cmd.includes("rm -r -f") || (baseCmd === "rm" && cmd.includes("-rf"))) {
+      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+      return;
+    }
+
     let response: string | string[] = `Command not found: ${cmd}`;
-    
-    const restrictedCmds = ['sudo', 'cd', 'mkdir', 'rm', 'touch', 'nano', 'vim', 'cat', 'ssh', 'apt', 'git'];
+
+    const restrictedCmds = ["sudo", "cd", "mkdir", "rm", "touch", "nano", "vim", "cat", "ssh", "apt", "git"];
 
     if (restrictedCmds.includes(baseCmd)) {
       response = `Permission denied: guest lacks sufficient clearance for "${baseCmd}". This incident will be reported to the Kernel.`;
-    } else if (cmd === 'help') {
-      response = 'Available: help, clear, whoami, skills, contact, exit';
-    } else if (cmd === 'whoami') {
-      response = 'soundpulse';
-    } else if (cmd === 'ls') {
+    } else if (cmd === "help") {
+      response = "Available: help, clear, whoami, skills, contact, exit";
+    } else if (cmd === "whoami") {
+      response = "soundpulse";
+    } else if (cmd === "ls") {
       response = [
-        'bin   dev  home  lib64  mnt  proc  run   srv  tmp  var',
-        'boot  etc  lib   media  opt  root  sbin  sys  usr'
-      ].join('\n');
-    } else if (cmd === 'skills') {
+        "bin   dev  home  lib64  mnt  proc  run   srv  tmp  var",
+        "boot  etc  lib   media  opt  root  sbin  sys  usr",
+      ].join("\n");
+    } else if (cmd === "skills") {
       response = [
-        'CORE_MATRIX // FULL_SPECTRUM_CAPABILITIES',
-        '----------------------------------------',
-        'FRONTEND ARCHITECT: Next.js, React, Vue, TS, TanStack',
-        'SYSTEMS ENGINEER: FastAPI, Node.js, Postgres, MongoDB, Redis',
-        'DATA STRATEGIST: PowerBI, Python, Pandas, SQL, Spark',
-        'CREATIVE OPERATOR: Adobe PS, Adobe AI, Capcut',
-        'GENERATIVE AI: Stable Diffusion, Midjourney, AI Video Gen',
-        'LLM APPLICATIONS: Gemini, LangChain, Livekit, LoRA',
-        'LLM R&D: RAG, Vector DB, Transformer, RL',
-        'DEEP LEARNING: CNN, Semantic Analysis, PyTorch, Cuda'
-      ].join('\n');
-    } else if (cmd === 'contact') {
+        "CORE_MATRIX // FULL_SPECTRUM_CAPABILITIES",
+        "----------------------------------------",
+        "FRONTEND ARCHITECT: Next.js, React, Vue, TS, TanStack",
+        "SYSTEMS ENGINEER: FastAPI, Node.js, Postgres, MongoDB, Redis",
+        "DATA STRATEGIST: PowerBI, Python, Pandas, SQL, Spark",
+        "CREATIVE OPERATOR: Adobe PS, Adobe AI, Capcut",
+        "GENERATIVE AI: Stable Diffusion, Midjourney, AI Video Gen",
+        "LLM APPLICATIONS: Gemini, LangChain, Livekit, LoRA",
+        "LLM R&D: RAG, Vector DB, Transformer, RL",
+        "DEEP LEARNING: CNN, Semantic Analysis, PyTorch, Cuda",
+      ].join("\n");
+    } else if (cmd === "contact") {
       response = [
-        'SIGNAL_CHANNEL: toby.io@outlook.com',
-        'GITHUB: https://github.com/soundpulse',
-        'LINKEDIN: https://www.linkedin.com/in/toby-io/'
-      ].join('\n');
-    } else if (cmd === 'exit') {
+        "SIGNAL_CHANNEL: toby.io@outlook.com",
+        "GITHUB: https://github.com/soundpulse",
+        "LINKEDIN: https://www.linkedin.com/in/toby-io/",
+      ].join("\n");
+    } else if (cmd === "exit") {
       if (onClose) {
         onClose();
         return;
       }
-      response = 'Terminal exit signal sent.';
-    } else if (cmd === 'clear') {
+      response = "Terminal exit signal sent.";
+    } else if (cmd === "clear") {
       setHistory([]);
-      setInput('');
+      setInput("");
       return;
     }
 
-    setHistory(prev => [...prev, `> ${input}`, response as string]);
-    setInput('');
+    setHistory((prev) => [...prev, `> ${input}`, response as string]);
+    setInput("");
   };
 
   const renderHistoryLine = (line: string, i: number) => {
-    const isInput = line.startsWith('>');
-    
+    const isInput = line.startsWith(">");
+
     // Simple URL regex
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = line.split(urlRegex);
 
     return (
-      <div key={i} className={`mb-1 whitespace-pre-wrap ${isInput ? 'text-cyan-500' : 'text-gray-400'}`}>
+      <div key={i} className={`mb-1 whitespace-pre-wrap ${isInput ? "text-cyan-500" : "text-gray-400"}`}>
         {parts.map((part, index) => {
           if (part.match(urlRegex)) {
             return (
               <button
                 key={index}
                 onClick={() => onOpenLink?.(part)}
-                className="text-cyan-500 hover:underline underline-offset-2 cursor-pointer transition-all"
-              >
+                className="text-cyan-500 hover:underline underline-offset-2 cursor-pointer transition-all">
                 {part}
               </button>
             );
@@ -102,7 +106,7 @@ const TerminalApp: React.FC<TerminalAppProps> = ({ onClose, onOpenLink }) => {
   };
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [history]);
 
   return (

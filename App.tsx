@@ -31,7 +31,8 @@ import ExternalLinkModal from "./components/ExternalLinkModal";
 import { Project } from "./types";
 import { PROJECTS } from "./constants";
 
-const RICKROLL_URL = "https://www.youtube.com/watch?v=siM9g9dpkZg";
+// 114514
+const RICKROLL_URL = "https://www.youtube.com/watch?v=iQhRmQWwDYs";
 
 // Perspective Highway Rhythm Game Background
 const RhythmBackground: React.FC = () => {
