@@ -206,14 +206,21 @@ const StreamApp: React.FC = () => {
               flexDirection: "column",
               position: "relative",
             }}>
-            {/* Empty Stream Area - Solid Light Pink Background */}
-            <div
+            {/* YouTube Video Embed */}
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/DjGxGMxvg4M?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&mute=0&loop=1&playlist=DjGxGMxvg4M"
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
               style={{
-                flex: 1,
-                backgroundColor: "#f8ecf8",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: "none",
               }}
             />
 

@@ -5,18 +5,27 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "node server-dev.js",
+    "dev:all": "concurrently \"pnpm run dev:server\" \"pnpm run dev\"",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "lucide-react": "^0.562.0",
     "pixelarticons": "1.8.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.1.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

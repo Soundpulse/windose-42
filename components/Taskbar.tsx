@@ -55,8 +55,8 @@ const Taskbar: React.FC<TaskbarProps> = ({ windows, isStartOpen, onToggleStart, 
       {/* System Tray */}
       <div className="flex items-center gap-4 px-4 font-mono text-[10px] border-l border-gray-800 bg-black/50 h-full">
         <div className="flex items-center gap-3">
-          {/* Status indicator */}
-          <div className="flex items-center gap-1.5">
+          {/* Status indicator (PC only) */}
+          <div className="hidden md:flex items-center gap-1.5">
             <Wifi size={12} className="text-gray-600" />
             <span className="text-gray-600 hidden lg:inline tracking-wider">ONLINE</span>
           </div>

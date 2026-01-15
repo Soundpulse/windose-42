@@ -28,7 +28,7 @@ import StackApp from "./components/apps/StackApp";
 import StreamApp from "./components/apps/StreamApp";
 import ExternalLinkModal from "./components/ExternalLinkModal";
 
-const RICKROLL_URL = "https://www.youtube.com/watch?v=siM9g9dpkZg&list=RDsiM9g9dpkZg&start_radio=1";
+const RICKROLL_URL = "https://www.youtube.com/watch?v=siM9g9dpkZg";
 
 // Perspective Highway Rhythm Game Background
 const RhythmBackground: React.FC = () => {
@@ -335,7 +335,7 @@ const App: React.FC = () => {
         <DesktopIcon icon={<User size={20} />} label="About" onClick={() => openApp("about")} />
         <DesktopIcon icon={<Folder size={20} />} label="Projects" onClick={() => openApp("projects")} />
         <DesktopIcon icon={<Trophy size={20} />} label="Achievements" onClick={() => openApp("achievements")} />
-        <DesktopIcon icon={<Layers size={20} />} label="Core Matrix" onClick={() => openApp("stack")} />
+        <DesktopIcon icon={<Layers size={20} />} label="Skills" onClick={() => openApp("stack")} />
         <DesktopIcon icon={<Terminal size={20} />} label="Terminal" onClick={() => openApp("terminal")} />
         <DesktopIcon icon={<MessageCircle size={20} />} label="Messages" onClick={() => openApp("chat")} />
         <DesktopIcon icon={<Map size={20} />} label="Travel Log" onClick={() => openApp("go_out")} />
@@ -351,8 +351,8 @@ const App: React.FC = () => {
         />
       </div>
 
-      {/* Start Stream Icon - Top Right Corner (hidden behind status) */}
-      <div className="fixed top-16 right-8 z-[10]">
+      {/* Start Stream Icon - Top Right Corner (PC only) */}
+      <div className="hidden md:block fixed top-16 right-8 z-[10]">
         <DesktopIcon
           icon={<img src="/sad-cat.webp" alt="Start Stream" className="w-12 h-12 object-cover" />}
           label="start stream"
@@ -433,7 +433,7 @@ const App: React.FC = () => {
 
             <div className="space-y-1">
               {windows
-                .filter((win) => win.id !== "stats")
+                .filter((win) => win.id !== "stats" && win.id !== "stream")
                 .map((win) => (
                   <button
                     key={win.id}

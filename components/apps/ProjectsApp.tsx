@@ -71,12 +71,6 @@ const ProjectsApp: React.FC = () => {
           </div>
         ))}
       </div>
-
-      {/* Footer */}
-      <div className="mt-8 p-4 border border-gray-800 bg-black text-gray-600 text-[10px] font-mono flex items-center gap-3">
-        <span className="text-white">◆</span>
-        <span className="tracking-wider">All projects are under active development.</span>
-      </div>
     </div>
   );
 };
