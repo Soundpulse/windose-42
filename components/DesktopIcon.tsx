@@ -14,12 +14,12 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({ icon, label, onClick, noBorde
       onClick={onClick}>
       {/* Icon container */}
       <div
-        className={`w-12 h-12 flex items-center justify-center ${
+        className={`w-12 h-12 aspect-square flex-shrink-0 flex items-center justify-center ${
           noBorder ? "bg-transparent" : "bg-[#111] border border-gray-800"
         } text-gray-500 group-hover:bg-white ${
           noBorder ? "" : "group-hover:border-white"
         } group-hover:text-black transition-all duration-150`}>
-        {icon}
+        <div className="w-full h-full flex items-center justify-center">{icon}</div>
       </div>
 
       {/* Label */}

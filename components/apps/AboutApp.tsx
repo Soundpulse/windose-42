@@ -23,8 +23,6 @@ const AboutApp: React.FC = () => {
             </span>
             <span className="text-gray-600">|</span>
             <span className="text-gray-300">LOS ANGELES, CA</span>
-            <span className="text-gray-600">|</span>
-            <span className="text-gray-300">DOB: Aug 21st, 1999</span>
           </div>
           <div className="mt-2 text-[10px] font-mono tracking-wider text-gray-400">
             <span className="text-white">CONTACT:</span> toby.io@outlook.com

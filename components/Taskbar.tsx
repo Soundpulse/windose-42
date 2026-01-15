@@ -46,7 +46,7 @@ const Taskbar: React.FC<TaskbarProps> = ({ windows, isStartOpen, onToggleStart, 
                 : 'bg-transparent text-gray-600 hover:text-gray-400'
             }`}
           >
-            <span className="text-gray-500">{win.icon}</span>
+            <span className="text-gray-500 w-4 h-4 flex-shrink-0 flex items-center justify-center">{win.icon}</span>
             <span className="hidden md:inline truncate tracking-wider uppercase">{win.title}</span>
           </button>
         ))}

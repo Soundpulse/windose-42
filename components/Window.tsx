@@ -274,7 +274,7 @@ const Window: React.FC<WindowProps> = ({
         onMouseDown={handleDragStart}
         onDoubleClick={toggleMaximize}>
         <div className="flex items-center gap-2 overflow-hidden">
-          <span className="text-gray-600">{icon}</span>
+          <span className="text-gray-600 w-4 h-4 flex-shrink-0 flex items-center justify-center">{icon}</span>
           <span className="text-[10px] font-mono text-gray-400 truncate tracking-wider uppercase">{title}</span>
         </div>
 
