@@ -219,7 +219,7 @@ export const PROJECTS: Project[] = [
     longDescription:
       "A containerized documentation tool that provides context-aware search and automatic documentation generation using only libraries relevant to your repository. Tailored to your specific codebase dependencies for precise, repository-focused documentation assistance.",
     tech: ["FastMCP", "Docker", "OpenAI", "MongoDB", "Express", "React", "Postgres"],
-    link: "",
+    link: "https://doctail.ai",
     image: "/doctail/doctail_1.png",
     media: [
       { type: "image", src: "/doctail/doctail_1.png" },
