@@ -227,6 +227,7 @@ const App: React.FC = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [hoveredLocationId, setHoveredLocationId] = useState<string | null>(null);
   const [confirmingLink, setConfirmingLink] = useState<string | null>(null);
+  const [isStreamMode, setIsStreamMode] = useState(false);
 
   const hoveredLocation = LOCATIONS.find((l) => l.id === hoveredLocationId);
 
@@ -266,6 +267,39 @@ const App: React.FC = () => {
     };
   }, []);
 
+  // Apply stream mode to body element and track time for increasing shake
+  useEffect(() => {
+    if (isStreamMode) {
+      document.body.classList.add("stream-mode-active");
+      const startTime = Date.now();
+      let animationFrameId: number;
+      let isActive = true;
+
+      const updateShakeIntensity = () => {
+        if (!isActive) return;
+        const elapsed = (Date.now() - startTime) / 1000; // seconds
+        // Increase shake intensity over time (starts at 2px, increases continuously)
+        const intensity = Math.min(2 + elapsed * 0.15, 20); // Start at 2px, max at 20px
+        document.documentElement.style.setProperty("--shake-intensity", `${intensity}px`);
+        animationFrameId = requestAnimationFrame(updateShakeIntensity);
+      };
+
+      updateShakeIntensity();
+
+      return () => {
+        isActive = false;
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+        document.body.classList.remove("stream-mode-active");
+        document.documentElement.style.setProperty("--shake-intensity", "0px");
+      };
+    } else {
+      document.body.classList.remove("stream-mode-active");
+      document.documentElement.style.setProperty("--shake-intensity", "0px");
+    }
+  }, [isStreamMode]);
+
   const openApp = useCallback(
     (id: AppID) => {
       setWindows((prev) =>
@@ -278,6 +312,10 @@ const App: React.FC = () => {
       );
       setMaxZ((prev) => prev + 1);
       setIsStartMenuOpen(false);
+      // Activate stream mode when stream app is opened
+      if (id === "stream") {
+        setIsStreamMode(true);
+      }
     },
     [maxZ]
   );
@@ -337,7 +375,57 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-black selection:bg-white selection:text-black">
+    <div
+      className={`relative h-screen w-screen overflow-hidden bg-black selection:bg-white selection:text-black ${
+        isStreamMode ? "stream-mode" : ""
+      }`}>
+      {/* Stream Mode Global Styles */}
+      {isStreamMode && (
+        <style>{`
+          @font-face {
+            font-family: 'Zpix';
+            src: url('/zpix.ttf') format('truetype');
+          }
+          
+          @keyframes shake-185bpm {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(calc(-1 * var(--shake-intensity, 2px)), calc(-1 * var(--shake-intensity, 2px))); }
+            50% { transform: translate(var(--shake-intensity, 2px), var(--shake-intensity, 2px)); }
+            75% { transform: translate(calc(-1 * var(--shake-intensity, 2px)), var(--shake-intensity, 2px)); }
+          }
+          
+          @keyframes glitch-flash {
+            0% { filter: none; }
+            30% { filter: none; }
+            35% { filter: hue-rotate(300deg) saturate(2.5) brightness(1.2); }
+            50% { filter: hue-rotate(300deg) saturate(2.5) brightness(1.2); }
+            55% { filter: none; }
+            60% { filter: none; }
+            65% { filter: hue-rotate(300deg) saturate(2.5) brightness(1.2); }
+            80% { filter: hue-rotate(300deg) saturate(2.5) brightness(1.2); }
+            85% { filter: none; }
+            100% { filter: none; }
+          }
+          
+          body.stream-mode-active,
+          body.stream-mode-active *,
+          body.stream-mode-active *::before,
+          body.stream-mode-active *::after {
+            font-family: 'Zpix', 'MS Gothic', 'Courier New', monospace !important;
+          }
+          
+          body.stream-mode-active {
+            animation: shake-185bpm 0.3243s infinite, glitch-flash 3s infinite !important;
+            --shake-intensity: 2px;
+          }
+          
+          body.stream-mode-active canvas,
+          body.stream-mode-active iframe {
+            animation: glitch-flash 3s infinite !important;
+          }
+        `}</style>
+      )}
+
       {/* Glitchy Rhythm Background */}
       <RhythmBackground />
 
