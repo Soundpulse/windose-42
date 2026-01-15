@@ -1,7 +1,16 @@
+import React from "react";
 
-import React from 'react';
-
-export type AppID = 'about' | 'projects' | 'terminal' | 'stats' | 'chat' | 'settings' | 'go_out' | 'achievements' | 'stack';
+export type AppID =
+  | "about"
+  | "projects"
+  | "terminal"
+  | "stats"
+  | "chat"
+  | "settings"
+  | "go_out"
+  | "achievements"
+  | "stack"
+  | "stream";
 
 export interface WindowState {
   id: AppID;
