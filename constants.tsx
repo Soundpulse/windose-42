@@ -168,7 +168,7 @@ export const PROJECTS: Project[] = [
     title: "GetGo 求奇",
     description: "Web marketplace for anime collectibles and figures. Featured by MYEIC.",
     longDescription:
-      "A vibrant web marketplace for buying, selling, and trading anime figures, collectibles, and merchandise. Features category filtering, price comparisons, user verification, and a unique lime-green aesthetic. Supports second-hand markets and official store integrations. Featured by MYEIC.",
+      "A vibrant web marketplace for buying, selling, and trading second-hand anime figures, collectibles, and merchandise. Features category filtering, price comparisons, user verification, and a unique lime-green aesthetic. Supports second-hand markets and official store integrations. Featured by MYEIC.",
     tech: ["MongoDB", "Express", "Vue.js", "Node.js"],
     link: "https://gogogok.com",
     image: "/getgo/getgo_1.png",
@@ -183,7 +183,7 @@ export const PROJECTS: Project[] = [
     title: "Doctail.ai",
     description: "AI-powered documentation assistant for developers. YC Top 10% Application.",
     longDescription:
-      "An intelligent documentation tool that helps developers navigate and understand codebases. Features context-aware search, automatic documentation generation, and integration with popular development environments. Selected as a Y Combinator Top 10% application.",
+      "A containerized documentation tool that provides context-aware search and automatic documentation generation using only libraries relevant to your repository. Tailored to your specific codebase dependencies for precise, repository-focused documentation assistance.",
     tech: ["FastMCP", "Docker", "OpenAI", "MongoDB", "Express", "React", "Postgres"],
     link: "",
     image: "/doctail/doctail_1.png",
@@ -213,7 +213,7 @@ export const PROJECTS: Project[] = [
     title: "ProPack Solutions",
     description: "E-commerce platform for sustainable packaging solutions.",
     longDescription:
-      "Full-featured B2B e-commerce platform for sustainable glass and plastic packaging. Includes product catalog, inventory management, quote requests, and order processing. Clean, eco-friendly design emphasizing the company's commitment to sustainability.",
+      "Full-featured B2B e-commerce platform for sustainable PCR (post-consumer recycled) plastic packaging. Includes product catalog, inventory management, quote requests, and order processing. Clean, eco-friendly design emphasizing the company's commitment to sustainability.",
     tech: ["MongoDB", "Express", "React", "Postgres", "Stripe"],
     link: "https://propacks.net",
     image: "/propacks/landing.png",
