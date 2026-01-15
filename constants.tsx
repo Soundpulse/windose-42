@@ -15,7 +15,7 @@ export const INITIAL_WINDOWS: WindowState[] = [
     zIndex: 101,
     icon: <Trophy size={14} />,
   },
-  { id: "stack", title: "Core Matrix", isOpen: false, isMinimized: false, zIndex: 101, icon: <Layers size={14} /> },
+  { id: "stack", title: "Skills", isOpen: false, isMinimized: false, zIndex: 101, icon: <Layers size={14} /> },
   { id: "chat", title: "Messages", isOpen: false, isMinimized: false, zIndex: 101, icon: <MessageCircle size={14} /> },
   { id: "go_out", title: "Travel Log", isOpen: false, isMinimized: false, zIndex: 101, icon: <Map size={14} /> },
   { id: "stream", title: "haishin", isOpen: false, isMinimized: false, zIndex: 101, icon: <Radio size={14} /> },

@@ -5,12 +5,12 @@ A high-performance interactive portfolio inspired by Needy Girl Overdose and Pos
 ## Features
 
 - **Desktop Interface**: Windows-like desktop environment with draggable windows, taskbar, and start menu
-- **Multiple Apps**: 
+- **Multiple Apps**:
   - About.md - Personal information
   - Projects - Showcase of work
   - Terminal - Command-line interface
   - Travel Log - Interactive map of locations
-  - Core Matrix - Technical stack breakdown
+  - Skills - Technical stack breakdown
   - System - Stats and system information
   - Achievements - Notable accomplishments
   - Messages - AI-powered chat with multiple personas
@@ -27,12 +27,14 @@ A high-performance interactive portfolio inspired by Needy Girl Overdose and Pos
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd windose-42
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
@@ -63,6 +65,7 @@ pnpm run dev:all
 ```
 
 This starts:
+
 - Dev server on `http://localhost:3001` (handles API routes)
 - Vite dev server on `http://localhost:3000` (proxies API calls)
 
@@ -129,4 +132,5 @@ windose-42/
 ```
 
 ## License
+
 Clone if you want :P MIT License

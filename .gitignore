@@ -44,3 +44,5 @@ coverage
 *.pem
 .cache
 .pnpm-store
+.vercel
+.env*.local
