@@ -33,6 +33,7 @@ export const INITIAL_WINDOWS: WindowState[] = [
   { id: "go_out", title: "touch grass", isOpen: false, isMinimized: false, zIndex: 101, icon: <Map size={14} /> },
   { id: "stream", title: "haishin", isOpen: false, isMinimized: false, zIndex: 101, icon: <Radio size={14} /> },
   { id: "research", title: "Research", isOpen: false, isMinimized: false, zIndex: 101, icon: <FileText size={14} /> },
+  { id: "project_view", title: "Project", isOpen: false, isMinimized: false, zIndex: 101, icon: <Eye size={14} /> },
 ];
 
 export interface Location {
