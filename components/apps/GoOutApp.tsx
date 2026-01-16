@@ -173,6 +173,28 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
   const animationRef = useRef<number>();
   const startTimeRef = useRef<number>(Date.now());
 
+  // Zoom and pan state
+  const [zoom, setZoom] = useState(1);
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+  const zoomRef = useRef(1);
+  const panOffsetRef = useRef({ x: 0, y: 0 });
+
+  // Drag state
+  const isDraggingRef = useRef(false);
+  const lastPointerRef = useRef<{ x: number; y: number } | null>(null);
+
+  // Pinch zoom state
+  const lastPinchDistRef = useRef<number | null>(null);
+  const pinchCenterRef = useRef<{ x: number; y: number } | null>(null);
+
+  // Keep refs in sync with state
+  useEffect(() => {
+    zoomRef.current = zoom;
+  }, [zoom]);
+  useEffect(() => {
+    panOffsetRef.current = panOffset;
+  }, [panOffset]);
+
   useEffect(() => {
     onHoverLocation?.(hoveredLoc);
   }, [hoveredLoc, onHoverLocation]);
@@ -199,9 +221,22 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
       ctx.clearRect(0, 0, width, height);
 
       const currentHover = hoveredLocRef.current;
-      const scale = Math.min(width / (bounds.width || 1), height / (bounds.height || 1)) * 0.7;
-      const offsetX = (width - bounds.width * scale) / 2 - bounds.minX * scale;
-      const offsetY = (height - bounds.height * scale) / 2 - bounds.minY * scale;
+      const currentZoom = zoomRef.current;
+      const currentPan = panOffsetRef.current;
+
+      // Base scale, then apply user zoom
+      const baseScale = Math.min(width / (bounds.width || 1), height / (bounds.height || 1)) * 0.7;
+      const scale = baseScale * currentZoom;
+
+      // Center offset + user pan
+      const baseOffsetX = (width - bounds.width * baseScale) / 2 - bounds.minX * baseScale;
+      const baseOffsetY = (height - bounds.height * baseScale) / 2 - bounds.minY * baseScale;
+
+      // Apply zoom around center
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const offsetX = centerX + (baseOffsetX - centerX) * currentZoom + currentPan.x;
+      const offsetY = centerY + (baseOffsetY - centerY) * currentZoom + currentPan.y;
 
       const toCanvas = (p: Point) => ({ x: p.x * scale + offsetX, y: p.y * scale + offsetY });
 
@@ -435,10 +470,20 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
     const { x: mx, y: my } = coords;
     const { width, height } = canvas;
 
-    // Use same scale/offset calculation as render
-    const scale = Math.min(width / (bounds.width || 1), height / (bounds.height || 1)) * 0.7;
-    const offsetX = (width - bounds.width * scale) / 2 - bounds.minX * scale;
-    const offsetY = (height - bounds.height * scale) / 2 - bounds.minY * scale;
+    // Use same scale/offset calculation as render (with zoom and pan)
+    const currentZoom = zoomRef.current;
+    const currentPan = panOffsetRef.current;
+
+    const baseScale = Math.min(width / (bounds.width || 1), height / (bounds.height || 1)) * 0.7;
+    const scale = baseScale * currentZoom;
+
+    const baseOffsetX = (width - bounds.width * baseScale) / 2 - bounds.minX * baseScale;
+    const baseOffsetY = (height - bounds.height * baseScale) / 2 - bounds.minY * baseScale;
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const offsetX = centerX + (baseOffsetX - centerX) * currentZoom + currentPan.x;
+    const offsetY = centerY + (baseOffsetY - centerY) * currentZoom + currentPan.y;
 
     // Fixed hit radius in canvas pixels (generous for touch, matches larger visuals)
     const hitRadius = Math.max(25, scale * 4);
@@ -468,10 +513,9 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
     return closestDist <= hitRadius ? closestId : null;
   };
 
-  // Unified handler for pointer/touch
-  const handleInteraction = (clientX: number, clientY: number) => {
+  // Unified handler for pointer/touch hover detection
+  const handleHoverDetection = (clientX: number, clientY: number) => {
     const found = detectLocation(clientX, clientY);
-    // Always update both ref and state together
     hoveredLocRef.current = found;
     setHoveredLoc(found);
   };
@@ -481,38 +525,165 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
     setHoveredLoc(null);
   };
 
-  // Mouse handlers
+  // Get distance between two touch points
+  const getPinchDistance = (touches: React.TouchList) => {
+    if (touches.length < 2) return 0;
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  // Get center point between two touches
+  const getPinchCenter = (touches: React.TouchList) => {
+    if (touches.length < 2) return { x: touches[0].clientX, y: touches[0].clientY };
+    return {
+      x: (touches[0].clientX + touches[1].clientX) / 2,
+      y: (touches[0].clientY + touches[1].clientY) / 2,
+    };
+  };
+
+  // Mouse wheel zoom handler
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // Zoom factor
+    const zoomDelta = e.deltaY > 0 ? 0.9 : 1.1;
+    const newZoom = Math.max(0.5, Math.min(5, zoomRef.current * zoomDelta));
+
+    // Zoom towards mouse position
+    const zoomChange = newZoom / zoomRef.current;
+    const newPanX = mouseX - (mouseX - panOffsetRef.current.x) * zoomChange;
+    const newPanY = mouseY - (mouseY - panOffsetRef.current.y) * zoomChange;
+
+    setZoom(newZoom);
+    setPanOffset({ x: newPanX, y: newPanY });
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button === 0) {
+      isDraggingRef.current = true;
+      lastPointerRef.current = { x: e.clientX, y: e.clientY };
+    }
+  };
+
   const handleMouseMove = (e: React.MouseEvent) => {
-    handleInteraction(e.clientX, e.clientY);
+    if (isDraggingRef.current && lastPointerRef.current) {
+      const dx = e.clientX - lastPointerRef.current.x;
+      const dy = e.clientY - lastPointerRef.current.y;
+      setPanOffset((prev) => ({ x: prev.x + dx, y: prev.y + dy }));
+      lastPointerRef.current = { x: e.clientX, y: e.clientY };
+    } else {
+      handleHoverDetection(e.clientX, e.clientY);
+    }
+  };
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+    lastPointerRef.current = null;
   };
 
   const handleMouseLeave = () => {
+    isDraggingRef.current = false;
+    lastPointerRef.current = null;
     clearHover();
   };
 
-  // Touch handlers
+  // Touch handlers with pinch-to-zoom and drag support
   const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    if (touch) {
-      handleInteraction(touch.clientX, touch.clientY);
+    if (e.touches.length === 2) {
+      // Pinch start
+      lastPinchDistRef.current = getPinchDistance(e.touches);
+      pinchCenterRef.current = getPinchCenter(e.touches);
+      isDraggingRef.current = false;
+    } else if (e.touches.length === 1) {
+      // Single touch - start drag
+      isDraggingRef.current = true;
+      lastPointerRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      handleHoverDetection(e.touches[0].clientX, e.touches[0].clientY);
     }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     e.preventDefault();
-    const touch = e.touches[0];
-    if (touch) {
-      handleInteraction(touch.clientX, touch.clientY);
+
+    if (e.touches.length === 2 && lastPinchDistRef.current !== null) {
+      // Pinch zoom
+      const newDist = getPinchDistance(e.touches);
+      const center = getPinchCenter(e.touches);
+
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const centerX = center.x - rect.left;
+      const centerY = center.y - rect.top;
+
+      // Calculate zoom
+      const zoomDelta = newDist / lastPinchDistRef.current;
+      const newZoom = Math.max(0.5, Math.min(5, zoomRef.current * zoomDelta));
+
+      // Zoom towards pinch center
+      const zoomChange = newZoom / zoomRef.current;
+      const newPanX = centerX - (centerX - panOffsetRef.current.x) * zoomChange;
+      const newPanY = centerY - (centerY - panOffsetRef.current.y) * zoomChange;
+
+      // Also pan if pinch center moved
+      if (pinchCenterRef.current) {
+        const panDx = center.x - pinchCenterRef.current.x;
+        const panDy = center.y - pinchCenterRef.current.y;
+        setPanOffset({ x: newPanX + panDx, y: newPanY + panDy });
+      } else {
+        setPanOffset({ x: newPanX, y: newPanY });
+      }
+
+      setZoom(newZoom);
+      lastPinchDistRef.current = newDist;
+      pinchCenterRef.current = center;
+    } else if (e.touches.length === 1 && isDraggingRef.current && lastPointerRef.current) {
+      // Single touch drag
+      const touch = e.touches[0];
+      const dx = touch.clientX - lastPointerRef.current.x;
+      const dy = touch.clientY - lastPointerRef.current.y;
+      setPanOffset((prev) => ({ x: prev.x + dx, y: prev.y + dy }));
+      lastPointerRef.current = { x: touch.clientX, y: touch.clientY };
+      handleHoverDetection(touch.clientX, touch.clientY);
     }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault();
-    // Keep selection visible on mobile
+    if (e.touches.length === 0) {
+      isDraggingRef.current = false;
+      lastPointerRef.current = null;
+      lastPinchDistRef.current = null;
+      pinchCenterRef.current = null;
+    } else if (e.touches.length === 1) {
+      // Switched from pinch to single touch
+      lastPinchDistRef.current = null;
+      pinchCenterRef.current = null;
+      isDraggingRef.current = true;
+      lastPointerRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
   };
 
   const handleTouchCancel = () => {
+    isDraggingRef.current = false;
+    lastPointerRef.current = null;
+    lastPinchDistRef.current = null;
+    pinchCenterRef.current = null;
     clearHover();
+  };
+
+  // Reset zoom and pan
+  const handleDoubleClick = () => {
+    setZoom(1);
+    setPanOffset({ x: 0, y: 0 });
   };
 
   const hoveredLocation = hoveredLoc ? LOCATIONS.find((l) => l.id === hoveredLoc) : null;
@@ -526,22 +697,36 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
           </div>
           <h2 className="text-sm font-mono tracking-[0.2em] text-white uppercase font-bold">Travel_Flow_v4.2</h2>
         </div>
-        <div className="text-[10px] font-mono text-gray-400 tracking-wider uppercase hidden md:block">
-          {LOCATIONS.length} Active Nodes
+        <div className="flex items-center gap-4">
+          {zoom !== 1 && (
+            <button
+              onClick={handleDoubleClick}
+              className="text-[10px] font-mono text-gray-500 hover:text-white tracking-wider uppercase transition-colors">
+              Reset View
+            </button>
+          )}
+          <span className="text-[10px] font-mono text-gray-400 tracking-wider uppercase hidden md:block">
+            {zoom !== 1 ? `${Math.round(zoom * 100)}% · ` : ""}
+            {LOCATIONS.length} Nodes
+          </span>
         </div>
       </header>
 
-      <div className="flex-1 relative cursor-crosshair overflow-hidden">
+      <div className="flex-1 relative cursor-grab overflow-hidden">
         <canvas
           ref={canvasRef}
+          onWheel={handleWheel}
+          onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchCancel}
+          onDoubleClick={handleDoubleClick}
           className="h-full w-full"
-          style={{ touchAction: "pan-x pan-y" }}
+          style={{ touchAction: "none", cursor: isDraggingRef.current ? "grabbing" : "grab" }}
         />
 
         {/* Mobile-only Location Tab - Overlay */}
