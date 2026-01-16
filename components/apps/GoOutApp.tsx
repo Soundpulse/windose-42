@@ -45,16 +45,16 @@ const POSITIONS: Record<string, Point> = {
   eur_elb0: { x: 100, y: 20 },
   edinburgh: { x: 100, y: 30 },
   manchester: { x: 100, y: 45 },
-  cambridge: { x: 100, y: 80 },
-  harrogate: { x: 100, y: 90 },
-  london: { x: 100, y: 100 },
-  france: { x: 100, y: 110 },
-  poland: { x: 85, y: 110 },
-  eur_elb_p: { x: 75, y: 110 },
-  portugal: { x: 75, y: 120 },
-  spain: { x: 75, y: 140 },
-  italy: { x: 55, y: 130 },
-  vatican: { x: 55, y: 145 },
+  cambridge: { x: 100, y: 73 },
+  harrogate: { x: 100, y: 85 },
+  london: { x: 100, y: 113 },
+  france: { x: 100, y: 125 },
+  poland: { x: 85, y: 125 },
+  eur_elb_p: { x: 75, y: 125 },
+  portugal: { x: 75, y: 125 },
+  spain: { x: 75, y: 145 },
+  italy: { x: 55, y: 135 },
+  vatican: { x: 55, y: 150 },
 
   buffalo: { x: 170, y: 0 },
   ec_elb_b: { x: 150, y: 0 },
@@ -78,16 +78,17 @@ const POSITIONS: Record<string, Point> = {
 };
 
 const METRO_LINES: MetroLine[] = [
-  { id: "main", color: "#ffffff", stations: ["macau", "zhuhai", "uk", "ny", "la"], width: 3 },
-  { id: "asia_north_n", color: "#aaaaaa", stations: ["zhuhai", "wuhan", "shanghai", "beijing"] },
+  { id: "main", color: "#ffffff", stations: ["macau", "zhuhai", "uk", "ny", "la"], width: 5 },
+  { id: "asia_north_n", color: "#8ecae6", stations: ["zhuhai", "wuhan", "shanghai", "beijing"], width: 3 },
   {
     id: "asia_north_s",
-    color: "#aaaaaa",
+    color: "#8ecae6",
     stations: ["zhuhai", "shenzhen", "guangzhou", "guilin", "yunnan", "chongqing", "tibet"],
+    width: 3,
   },
   {
     id: "se_asia",
-    color: "#888888",
+    color: "#a78bfa",
     stations: [
       "beijing",
       "asia_elb_k",
@@ -101,11 +102,12 @@ const METRO_LINES: MetroLine[] = [
       "sg",
       "malay",
     ],
+    width: 3,
   },
-  { id: "se_asia_tw", color: "#888888", stations: ["hk", "taiwan"] },
+  { id: "se_asia_tw", color: "#a78bfa", stations: ["hk", "taiwan"], width: 3 },
   {
     id: "euro",
-    color: "#999999",
+    color: "#fbbf24",
     stations: [
       "iceland",
       "eur_elb0",
@@ -121,17 +123,20 @@ const METRO_LINES: MetroLine[] = [
       "portugal",
       "spain",
     ],
+    width: 3,
   },
-  { id: "euro_ext", color: "#999999", stations: ["portugal", "italy", "vatican"] },
+  { id: "euro_ext", color: "#fbbf24", stations: ["portugal", "italy", "vatican"], width: 3 },
   {
     id: "usa",
-    color: "#bbbbbb",
+    color: "#f472b6",
     stations: ["sf", "usa_elb1", "la", "usa_elb2", "sd", "usa_elb3", "vegas", "usa_elb_v", "slc", "denver"],
+    width: 3,
   },
   {
     id: "east_coast",
-    color: "#cccccc",
+    color: "#34d399",
     stations: ["buffalo", "ec_elb_b", "ithaca", "ny", "dc", "philly", "miami", "ec_elb_h", "hawaii"],
+    width: 3,
   },
 ];
 
@@ -200,7 +205,7 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
 
       const toCanvas = (p: Point) => ({ x: p.x * scale + offsetX, y: p.y * scale + offsetY });
 
-      // Draw Lines
+      // Draw Lines - Thicker, techy style
       METRO_LINES.forEach((line) => {
         const points = line.stations
           .map((s) => POSITIONS[s])
@@ -209,25 +214,42 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
         if (points.length < 2) return;
         const isHoveredLine = currentHover && line.stations.includes(currentHover);
 
+        // Base line width - much thicker
+        const baseWidth = Math.max(3, ((line.width || 2) * scale) / 2.5);
+
+        // Glow effect for hovered lines
+        if (isHoveredLine) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.strokeStyle = line.color;
+          ctx.lineWidth = baseWidth + 6;
+          ctx.globalAlpha = 0.3;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          drawSchematicPath(ctx, points, line.stations, (15 * scale) / 5);
+          ctx.stroke();
+          ctx.restore();
+        }
+
         ctx.beginPath();
         ctx.strokeStyle = line.color;
-        ctx.lineWidth = ((line.width || 2) * scale) / 5;
+        ctx.lineWidth = baseWidth;
 
         if (currentHover && !isHoveredLine) {
-          ctx.globalAlpha = 0.1;
+          ctx.globalAlpha = 0.15;
         } else {
-          ctx.globalAlpha = isHoveredLine ? 1.0 : 0.8;
+          ctx.globalAlpha = isHoveredLine ? 1.0 : 0.7;
         }
 
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        drawSchematicPath(ctx, points, line.stations, (10 * scale) / 5);
+        drawSchematicPath(ctx, points, line.stations, (15 * scale) / 5);
         ctx.stroke();
         ctx.globalAlpha = 1.0;
 
-        // Draw moving indicator
+        // Draw moving indicator - larger, glowing
         if (!currentHover || isHoveredLine) {
-          const progress = Math.abs(((elapsed * 0.15) % 2) - 1);
+          const progress = Math.abs(((elapsed * 0.12) % 2) - 1);
           const idx = Math.floor(progress * (points.length - 1));
           const lt = (progress * (points.length - 1)) % 1;
           if (idx < points.length - 1) {
@@ -238,15 +260,22 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
             ctx.save();
             ctx.translate(tx, ty);
             ctx.rotate(Math.atan2(p2.y - p1.y, p2.x - p1.x));
+
+            // Glow
+            ctx.shadowColor = "#fff";
+            ctx.shadowBlur = 8;
             ctx.fillStyle = "#fff";
-            ctx.fillRect((-6 * scale) / 5, (-1.5 * scale) / 5, (12 * scale) / 5, (3 * scale) / 5);
+            const indicatorW = Math.max(12, (16 * scale) / 5);
+            const indicatorH = Math.max(4, (5 * scale) / 5);
+            ctx.fillRect(-indicatorW / 2, -indicatorH / 2, indicatorW, indicatorH);
+            ctx.shadowBlur = 0;
             ctx.restore();
           }
         }
       });
 
-      // Draw Locations
-      LOCATIONS.forEach((loc) => {
+      // Helper to draw a location marker and optional label
+      const drawLocation = (loc: (typeof LOCATIONS)[0], drawLabel: boolean) => {
         const pos = POSITIONS[loc.id];
         if (!pos) return;
         const cp = toCanvas(pos);
@@ -255,51 +284,110 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
 
         ctx.globalAlpha = 1;
 
-        if (isHub) {
-          // Hub Marker
-          ctx.fillStyle = "#fff";
-          ctx.shadowBlur = isHovered ? 10 : 2;
-          ctx.shadowColor = "#fff";
-          ctx.fillRect(cp.x - (5 * scale) / 5, cp.y - (5 * scale) / 5, (10 * scale) / 5, (10 * scale) / 5);
-          ctx.shadowBlur = 0;
+        // Size scaling
+        const hubSize = Math.max(10, (14 * scale) / 5);
+        const nodeRadius = Math.max(6, (8 * scale) / 5);
 
-          // Hub Border
-          ctx.strokeStyle = "#000";
-          ctx.lineWidth = 1;
-          ctx.strokeRect(cp.x - (5 * scale) / 5, cp.y - (5 * scale) / 5, (10 * scale) / 5, (10 * scale) / 5);
+        if (isHub) {
+          // Hub Marker - Larger square with techy glow
+          ctx.save();
+
+          // Outer glow
+          ctx.shadowColor = isHovered ? "#fff" : "rgba(255,255,255,0.5)";
+          ctx.shadowBlur = isHovered ? 20 : 8;
+
+          // Main square
+          ctx.fillStyle = "#fff";
+          ctx.fillRect(cp.x - hubSize / 2, cp.y - hubSize / 2, hubSize, hubSize);
+
+          // Inner detail (tech look)
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = "#000";
+          const innerSize = hubSize * 0.4;
+          ctx.fillRect(cp.x - innerSize / 2, cp.y - innerSize / 2, innerSize, innerSize);
+
+          // Border
+          ctx.strokeStyle = isHovered ? "#fff" : "rgba(255,255,255,0.8)";
+          ctx.lineWidth = isHovered ? 2 : 1;
+          ctx.strokeRect(cp.x - hubSize / 2, cp.y - hubSize / 2, hubSize, hubSize);
+
+          ctx.restore();
         } else {
-          // Station Marker
+          // Station Marker - Larger circles with glow
+          ctx.save();
+
+          // Outer glow
+          if (isHovered) {
+            ctx.shadowColor = "#fff";
+            ctx.shadowBlur = 15;
+          }
+
+          // Outer ring
           ctx.beginPath();
-          ctx.arc(cp.x, cp.y, (4 * scale) / 5, 0, Math.PI * 2);
-          ctx.fillStyle = isHovered ? "#fff" : "#000";
+          ctx.arc(cp.x, cp.y, nodeRadius, 0, Math.PI * 2);
+          ctx.fillStyle = isHovered ? "#fff" : "#111";
           ctx.fill();
           ctx.strokeStyle = "#fff";
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = isHovered ? 3 : 2;
           ctx.stroke();
+
+          // Inner dot for techy look
+          if (!isHovered) {
+            ctx.beginPath();
+            ctx.arc(cp.x, cp.y, nodeRadius * 0.35, 0, Math.PI * 2);
+            ctx.fillStyle = "#fff";
+            ctx.fill();
+          }
+
+          ctx.shadowBlur = 0;
+          ctx.restore();
         }
 
-        // Labels
-        if (isHub || isHovered) {
-          const fontSize = Math.max(11, (13 * scale) / 5);
+        // Labels - Larger font
+        if (drawLabel && (isHub || isHovered)) {
+          const fontSize = Math.max(12, (16 * scale) / 5);
           ctx.save();
           ctx.translate(cp.x, cp.y);
           ctx.rotate(-Math.PI / 4);
 
-          ctx.font = `${isHovered ? "700" : "400"} ${fontSize}px "Space Mono", monospace`;
+          ctx.font = `${isHovered ? "700" : "500"} ${fontSize}px "Space Mono", monospace`;
           ctx.textAlign = "left";
 
           // Label Background for contrast
           const text = loc.name.toUpperCase();
           const metrics = ctx.measureText(text);
-          ctx.fillStyle = "rgba(0,0,0,0.8)";
-          ctx.fillRect((12 * scale) / 5 - 2, -fontSize / 2 - 2, metrics.width + 4, fontSize + 4);
+          const labelOffset = hubSize / 2 + 8;
+
+          ctx.fillStyle = "rgba(0,0,0,0.9)";
+          ctx.fillRect(labelOffset - 4, -fontSize / 2 - 3, metrics.width + 8, fontSize + 6);
+
+          // Border on label
+          ctx.strokeStyle = isHovered ? "#fff" : "rgba(255,255,255,0.3)";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(labelOffset - 4, -fontSize / 2 - 3, metrics.width + 8, fontSize + 6);
 
           ctx.fillStyle = "#fff";
           ctx.textBaseline = "middle";
-          ctx.fillText(text, (12 * scale) / 5, 0);
+          ctx.fillText(text, labelOffset, 0);
           ctx.restore();
         }
+      };
+
+      // Draw Locations in two passes: non-hovered first, then hovered on top
+      // Pass 1: Draw all non-hovered locations with labels
+      LOCATIONS.forEach((loc) => {
+        if (loc.id !== currentHover) {
+          drawLocation(loc, true);
+        }
       });
+
+      // Pass 2: Draw hovered location last (on top)
+      if (currentHover) {
+        const hoveredLoc = LOCATIONS.find((loc) => loc.id === currentHover);
+        if (hoveredLoc) {
+          drawLocation(hoveredLoc, true);
+        }
+      }
 
       animationRef.current = requestAnimationFrame(render);
     };
@@ -352,8 +440,8 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
     const offsetX = (width - bounds.width * scale) / 2 - bounds.minX * scale;
     const offsetY = (height - bounds.height * scale) / 2 - bounds.minY * scale;
 
-    // Fixed hit radius in canvas pixels (generous for touch)
-    const hitRadius = Math.max(20, scale * 3);
+    // Fixed hit radius in canvas pixels (generous for touch, matches larger visuals)
+    const hitRadius = Math.max(25, scale * 4);
 
     let closestId: string | null = null;
     let closestDist = Infinity;
@@ -475,19 +563,19 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
         </div>
       </div>
 
-      <footer className="h-10 bg-black border-t border-gray-800 px-5 flex items-center justify-between text-[10px] font-mono text-gray-500 tracking-widest uppercase flex-shrink-0">
-        <div className="flex gap-4">
+      <footer className="h-12 bg-black border-t border-gray-800 px-5 flex items-center justify-between text-[10px] font-mono text-gray-500 tracking-widest uppercase flex-shrink-0">
+        <div className="flex gap-5">
           <span className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-white" /> MAIN_HUB
+            <span className="w-3 h-3 bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]" /> HUB
           </span>
           <span className="flex items-center gap-2">
-            <span className="w-2 h-2 border border-white" /> NODE
+            <span className="w-3 h-3 rounded-full border-2 border-white bg-black" /> NODE
           </span>
         </div>
         <span className={`hidden md:inline ${hoveredLoc ? "text-white" : ""}`}>
-          {hoveredLoc ? `STATUS_CONNECTED: ${hoveredLoc.toUpperCase()}` : "IDLE: WAITING FOR UPLINK"}
+          {hoveredLoc ? `CONNECTED: ${hoveredLoc.toUpperCase()}` : "IDLE: AWAITING INPUT"}
         </span>
-        <span className={`md:hidden ${hoveredLoc ? "text-white" : ""}`}>{hoveredLoc ? "CONNECTED" : "IDLE"}</span>
+        <span className={`md:hidden ${hoveredLoc ? "text-white" : ""}`}>{hoveredLoc ? "●" : "○"}</span>
       </footer>
     </div>
   );
