@@ -75,29 +75,14 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x01</span>
-              <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP GRANT</span>
-            </div>
-            <h3 className="text-lg font-light mb-2">Cartesia Startup Grant</h3>
-            <p className="text-xs text-white leading-relaxed uppercase tracking-tight">
-              Accepted into the Cartesia startup program.
-            </p>
-            <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2025.10.20</div>
-          </div>
-
-          <div className="group relative border border-gray-800 p-6 hover:border-white transition-colors bg-black/50 backdrop-blur-sm">
-            <div className="absolute -top-2 -left-2 w-4 h-4 border-l border-t border-white opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
-
-            <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x02</span>
+              <span className="text-[10px] text-gray-300">◆ 0x0A</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP PROGRAM</span>
             </div>
-            <h3 className="text-lg font-light mb-2">Deepgram Startup Program</h3>
+            <h3 className="text-lg font-light mb-2">AWS Activate Startup Program</h3>
             <p className="text-xs text-white leading-relaxed uppercase tracking-tight">
-              Accepted into the Deepgram startup program.
+              Accepted into the AWS Activate startup program.
             </p>
-            <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2025.10.20</div>
+            <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2026.01.16</div>
           </div>
 
           <div className="group relative border border-gray-800 p-6 hover:border-white transition-colors bg-black/50 backdrop-blur-sm">
@@ -105,7 +90,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x03</span>
+              <span className="text-[10px] text-gray-300">◆ 0x09</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP GRANT</span>
             </div>
             <h3 className="text-lg font-light mb-2">Eleven Labs Grant</h3>
@@ -120,7 +105,37 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x04</span>
+              <span className="text-[10px] text-gray-300">◆ 0x08</span>
+              <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP GRANT</span>
+            </div>
+            <h3 className="text-lg font-light mb-2">Cartesia Startup Grant</h3>
+            <p className="text-xs text-white leading-relaxed uppercase tracking-tight">
+              Accepted into the Cartesia startup program.
+            </p>
+            <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2025.10.20</div>
+          </div>
+
+          <div className="group relative border border-gray-800 p-6 hover:border-white transition-colors bg-black/50 backdrop-blur-sm">
+            <div className="absolute -top-2 -left-2 w-4 h-4 border-l border-t border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <div className="flex justify-between items-start mb-4">
+              <span className="text-[10px] text-gray-300">◆ 0x07</span>
+              <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP PROGRAM</span>
+            </div>
+            <h3 className="text-lg font-light mb-2">Deepgram Startup Program</h3>
+            <p className="text-xs text-white leading-relaxed uppercase tracking-tight">
+              Accepted into the Deepgram startup program.
+            </p>
+            <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2025.10.20</div>
+          </div>
+
+          <div className="group relative border border-gray-800 p-6 hover:border-white transition-colors bg-black/50 backdrop-blur-sm">
+            <div className="absolute -top-2 -left-2 w-4 h-4 border-l border-t border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <div className="flex justify-between items-start mb-4">
+              <span className="text-[10px] text-gray-300">◆ 0x06</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">MEDIA FEATURE</span>
             </div>
             <h3 className="text-lg font-light mb-2">MYEIC Magazine Feature</h3>
@@ -150,7 +165,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x06</span>
+              <span className="text-[10px] text-gray-300">◆ 0x04</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STUDENT REP</span>
             </div>
             <h3 className="text-lg font-light mb-2">NCL+ Advanced Award</h3>
@@ -165,7 +180,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x07</span>
+              <span className="text-[10px] text-gray-300">◆ 0x03</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">ROBOTICS</span>
             </div>
             <h3 className="text-lg font-light mb-2">Robotics Innovation</h3>
@@ -180,7 +195,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x08</span>
+              <span className="text-[10px] text-gray-300">◆ 0x02</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">GREGGED</span>
             </div>
             <h3 className="text-lg font-light mb-2">GregTech: New Horizons Stargate Completion (MP)</h3>
@@ -197,7 +212,7 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
-              <span className="text-[10px] text-gray-300">◆ 0x09</span>
+              <span className="text-[10px] text-gray-300">◆ 0x01</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">CLICKING CIRCLES</span>
             </div>
             <h3 className="text-lg font-light mb-2">Osu! #1 Macau</h3>
