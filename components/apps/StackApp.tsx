@@ -71,7 +71,7 @@ const StackApp: React.FC = () => {
               <Command size={24} />
             </div>
             <div>
-              <h1 className="text-4xl font-light tracking-tighter uppercase italic">Full Tech Stack</h1>
+              <h1 className="text-4xl font-light tracking-tighter uppercase italic">Tech Stack</h1>
               <div className="text-[10px] text-gray-500 tracking-[0.4em] mt-1 uppercase">0 TO 1 PRODUCT ARCHITECT</div>
             </div>
           </div>

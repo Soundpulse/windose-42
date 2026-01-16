@@ -239,7 +239,7 @@ const ChatApp: React.FC = () => {
   };
 
   return (
-    <div className="flex h-full bg-[#0a0a0a] text-gray-300">
+    <div className="flex h-full bg-[#0a0a0a] text-gray-300 overflow-x-hidden">
       {/* Sidebar */}
       <div className="w-56 border-r border-gray-800 bg-black hidden md:flex flex-col">
         <div className="p-4 border-b border-gray-800 text-[10px] font-mono text-gray-600 tracking-[0.2em] uppercase">
@@ -277,10 +277,31 @@ const ChatApp: React.FC = () => {
       </div>
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
         {/* Header */}
         <div className="p-4 border-b border-gray-800 flex items-center justify-between bg-black/50 backdrop-blur-md">
-          <div className="flex items-center gap-3">
+          {/* Mobile Dropdown - Only visible on mobile */}
+          <div className="md:hidden flex-1">
+            <select
+              value={activePersonaId}
+              onChange={(e) => setActivePersonaId(e.target.value)}
+              className="w-full bg-black border border-gray-800 text-white text-[10px] font-mono tracking-[0.2em] uppercase px-3 py-2 focus:border-white focus:outline-none transition-all appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 8px center",
+                paddingRight: "28px",
+              }}>
+              {PERSONAS.map((p) => (
+                <option key={p.id} value={p.id} className="bg-black text-white">
+                  {p.name} // {p.role}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Desktop Header - Hidden on mobile */}
+          <div className="hidden md:flex items-center gap-3 flex-1">
             <div className="w-2 h-2 bg-white animate-pulse" />
             <span className="text-[10px] font-mono text-white tracking-[0.2em] uppercase font-bold">
               {activePersona.name} <span className="text-gray-600 ml-2 font-light">// {activePersona.role}</span>
@@ -292,13 +313,16 @@ const ChatApp: React.FC = () => {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-auto p-6 space-y-6 retro-scroll">
+        <div
+          className="flex-1 overflow-y-auto overflow-x-hidden p-6 space-y-6 retro-scroll"
+          style={{ touchAction: "pan-y" }}>
           {chatState[activePersonaId].map((m) => (
             <div
               key={m.id}
               className={`flex flex-col ${
                 m.self ? "items-end" : "items-start"
-              } animate-in fade-in slide-in-from-bottom-2 duration-300`}>
+              } animate-in fade-in slide-in-from-bottom-2 duration-300`}
+              style={{ touchAction: "manipulation" }}>
               <div className="flex items-center gap-3 mb-2 px-1">
                 {!m.self && <span className="text-[8px] font-mono text-gray-700">[{activePersona.avatar}]</span>}
                 <span
@@ -310,9 +334,10 @@ const ChatApp: React.FC = () => {
                 <span className="text-[8px] text-gray-800 font-mono tracking-tighter">{m.time}</span>
               </div>
               <div
-                className={`max-w-[85%] px-4 py-3 text-xs leading-relaxed transition-all shadow-xl font-mono ${
+                className={`max-w-[85%] px-4 py-3 text-xs leading-relaxed transition-all shadow-xl font-mono select-none ${
                   m.self ? "bg-white text-black font-bold" : "bg-gray-900/50 border border-gray-800 text-gray-300"
-                }`}>
+                }`}
+                style={{ touchAction: "manipulation", WebkitUserSelect: "none", userSelect: "none" }}>
                 {m.self ? (
                   m.text
                 ) : (

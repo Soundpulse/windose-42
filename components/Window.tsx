@@ -200,7 +200,7 @@ const Window: React.FC<WindowProps> = ({
         top: "48px",
         left: 0,
         width: "100%",
-        height: "calc(100% - 48px)",
+        height: "calc(100svh - 48px)",
         zIndex: zIndex,
         transition: isMaximized && !isActive ? "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
       };

@@ -51,13 +51,13 @@ const ResearchApp: React.FC<ResearchAppProps> = ({ onOpenLink }) => {
   return (
     <div className="h-full flex flex-col md:flex-row">
       {/* PDF List Sidebar */}
-      <div className="w-full md:w-48 lg:w-56 xl:w-64 border-b md:border-b-0 md:border-r border-gray-800 bg-black overflow-y-auto flex-shrink-0">
-        <div className="p-3 md:p-4 border-b border-gray-800">
+      <div className="w-full md:w-48 lg:w-56 xl:w-64 border-b md:border-b-0 md:border-r border-gray-800 bg-black flex-shrink-0 flex flex-col">
+        <div className="p-3 md:p-4 border-b border-gray-800 flex-shrink-0">
           <h2 className="text-sm font-light text-white tracking-wide mb-1">Research Files</h2>
           <p className="text-[9px] font-mono text-gray-600 tracking-wider">/research/</p>
         </div>
 
-        <div className="p-2">
+        <div className="p-2 flex-1 overflow-y-auto">
           {pdfFiles.map((pdf) => (
             <div
               key={pdf.id}
@@ -98,7 +98,7 @@ const ResearchApp: React.FC<ResearchAppProps> = ({ onOpenLink }) => {
                   src={`${selectedPDF.path}#toolbar=1&navpanes=1&scrollbar=1&zoom=page-width`}
                   className="w-full h-full"
                   style={{
-                    minHeight: "calc(100vh - 150px)",
+                    minHeight: "calc(100svh - 150px)",
                     minWidth: "100%",
                   }}
                   title={selectedPDF.name}

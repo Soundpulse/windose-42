@@ -403,9 +403,10 @@ const App: React.FC = () => {
 
   return (
     <div
-      className={`relative h-screen w-screen overflow-hidden bg-black selection:bg-white selection:text-black ${
+      className={`relative w-screen overflow-hidden bg-black selection:bg-white selection:text-black ${
         isStreamMode ? "stream-mode" : ""
-      }`}>
+      }`}
+      style={{ height: "100svh" }}>
       {/* Stream Mode Global Styles */}
       {isStreamMode && (
         <style>{`
@@ -581,7 +582,7 @@ const App: React.FC = () => {
 
             <div className="space-y-1">
               {windows
-                .filter((win) => win.id !== "stats" && win.id !== "stream")
+                .filter((win) => win.id !== "stats" && win.id !== "stream" && win.id !== "project_view")
                 .map((win) => (
                   <button
                     key={win.id}
@@ -631,9 +632,9 @@ const App: React.FC = () => {
         }}
       />
 
-      {/* Location Inspector */}
+      {/* Location Inspector - Desktop only */}
       <div
-        className={`fixed right-6 bottom-20 w-80 transition-all duration-200 pointer-events-none z-[100] ${
+        className={`hidden md:block fixed right-6 bottom-20 w-80 transition-all duration-200 pointer-events-none z-[100] ${
           hoveredLocation ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}>
         <div className="bg-black border border-gray-800 p-6 text-right">

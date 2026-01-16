@@ -87,14 +87,17 @@ const TerminalApp: React.FC<TerminalAppProps> = ({ onClose, onOpenLink }) => {
     const parts = line.split(urlRegex);
 
     return (
-      <div key={i} className={`mb-1 whitespace-pre-wrap ${isInput ? "text-cyan-500" : "text-gray-400"}`}>
+      <div
+        key={i}
+        className={`mb-1 whitespace-pre-wrap text-xs md:text-sm ${isInput ? "text-cyan-500" : "text-gray-400"}`}>
         {parts.map((part, index) => {
           if (part.match(urlRegex)) {
             return (
               <button
                 key={index}
                 onClick={() => onOpenLink?.(part)}
-                className="text-cyan-500 hover:underline underline-offset-2 cursor-pointer transition-all">
+                className="text-cyan-500 hover:underline underline-offset-2 cursor-pointer transition-all text-xs md:text-sm"
+                style={{ touchAction: "manipulation" }}>
                 {part}
               </button>
             );
@@ -110,18 +113,18 @@ const TerminalApp: React.FC<TerminalAppProps> = ({ onClose, onOpenLink }) => {
   }, [history]);
 
   return (
-    <div className="bg-black p-4 font-mono text-sm h-full flex flex-col">
-      <div className="flex-1 overflow-auto retro-scroll pb-4">
+    <div className="bg-black p-2 md:p-4 font-mono text-xs md:text-sm h-full flex flex-col overflow-x-hidden">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden retro-scroll pb-2 md:pb-4">
         {history.map((line, i) => renderHistoryLine(line, i))}
         <div ref={bottomRef} />
       </div>
-      <form onSubmit={handleCommand} className="flex items-center border-t border-[#222] pt-2">
-        <span className="text-green-500 mr-2">guest@windose:~$</span>
+      <form onSubmit={handleCommand} className="flex items-center border-t border-[#222] pt-2 flex-shrink-0">
+        <span className="text-green-500 mr-2 text-xs md:text-sm whitespace-nowrap">guest@windose:~$</span>
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="bg-transparent border-none outline-none flex-1 text-white"
+          className="bg-transparent border-none outline-none flex-1 text-white text-xs md:text-sm min-w-0"
           autoFocus
         />
       </form>

@@ -350,6 +350,8 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
     }
   };
 
+  const hoveredLocation = hoveredLoc ? LOCATIONS.find((l) => l.id === hoveredLoc) : null;
+
   return (
     <div className="h-full w-full bg-black flex flex-col select-none overflow-hidden relative" ref={containerRef}>
       <header className="px-5 py-4 bg-black border-b border-gray-800 flex justify-between items-center z-50">
@@ -359,12 +361,12 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
           </div>
           <h2 className="text-sm font-mono tracking-[0.2em] text-white uppercase font-bold">Travel_Flow_v4.2</h2>
         </div>
-        <div className="text-[10px] font-mono text-gray-400 tracking-wider uppercase">
+        <div className="text-[10px] font-mono text-gray-400 tracking-wider uppercase hidden md:block">
           {LOCATIONS.length} Active Nodes
         </div>
       </header>
 
-      <div className="flex-1 relative cursor-crosshair">
+      <div className="flex-1 relative cursor-crosshair overflow-hidden">
         <canvas
           ref={canvasRef}
           onMouseMove={handleMouseMove}
@@ -376,7 +378,25 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
         />
       </div>
 
-      <footer className="h-10 bg-black border-t border-gray-800 px-5 flex items-center justify-between text-[10px] font-mono text-gray-500 tracking-widest uppercase">
+      {/* Mobile-only Location Tab */}
+      <div
+        className={`md:hidden bg-black border-t border-gray-800 transition-all duration-200 overflow-hidden ${
+          hoveredLocation ? "max-h-40" : "max-h-0"
+        }`}>
+        {hoveredLocation && (
+          <div className="p-4">
+            <h1 className="text-lg font-light text-white mb-2 tracking-wide">{hoveredLocation.name}</h1>
+            <div className="flex gap-2 mb-3">
+              <span className="text-[8px] font-mono tracking-[0.1em] text-black bg-white px-2 py-0.5 uppercase">
+                {hoveredLocation.label}
+              </span>
+            </div>
+            <p className="text-[11px] text-gray-500 font-light leading-relaxed">{hoveredLocation.description}</p>
+          </div>
+        )}
+      </div>
+
+      <footer className="h-10 bg-black border-t border-gray-800 px-5 flex items-center justify-between text-[10px] font-mono text-gray-500 tracking-widest uppercase flex-shrink-0">
         <div className="flex gap-4">
           <span className="flex items-center gap-2">
             <span className="w-2 h-2 bg-white" /> MAIN_HUB
@@ -385,8 +405,11 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
             <span className="w-2 h-2 border border-white" /> NODE
           </span>
         </div>
-        <span className={hoveredLoc ? "text-white" : ""}>
+        <span className={`hidden md:inline ${hoveredLoc ? "text-white" : ""}`}>
           {hoveredLoc ? `STATUS_CONNECTED: ${hoveredLoc.toUpperCase()}` : "IDLE: WAITING FOR UPLINK"}
+        </span>
+        <span className={`md:hidden ${hoveredLoc ? "text-white" : ""}`}>
+          {hoveredLoc ? "CONNECTED" : "IDLE"}
         </span>
       </footer>
     </div>
