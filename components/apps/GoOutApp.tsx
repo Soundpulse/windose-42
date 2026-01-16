@@ -320,34 +320,111 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  // Get canvas coordinates from client coordinates
+  const getCanvasCoords = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return null;
+
     const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left,
-      my = e.clientY - rect.top;
-    const scale = Math.min(canvas.width / (bounds.width || 1), canvas.height / (bounds.height || 1)) * 0.7;
-    const ox = (canvas.width - bounds.width * scale) / 2 - bounds.minX * scale;
-    const oy = (canvas.height - bounds.height * scale) / 2 - bounds.minY * scale;
+    // Scale from CSS pixels to canvas pixels
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
 
-    let found = null;
-    const validStationIds = LOCATIONS.map((l) => l.id);
-    for (const [id, p] of Object.entries(POSITIONS)) {
-      if (!validStationIds.includes(id) && id !== "macau") continue;
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY,
+    };
+  };
 
-      const isHub = METRO_LINES.filter((l) => l.stations.includes(id)).length > 1 || id === "macau" || id === "ny";
-      const hitRadius = (isHub ? 50 : 35) * (scale / 5);
-      const dist = Math.sqrt((mx - (p.x * scale + ox)) ** 2 + (my - (p.y * scale + oy)) ** 2);
-      if (dist < Math.max(isHub ? 45 : 30, hitRadius)) {
-        found = id;
-        break;
+  // Detect location at pointer position - simple closest point algorithm
+  const detectLocation = (clientX: number, clientY: number): string | null => {
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
+
+    const coords = getCanvasCoords(clientX, clientY);
+    if (!coords) return null;
+
+    const { x: mx, y: my } = coords;
+    const { width, height } = canvas;
+
+    // Use same scale/offset calculation as render
+    const scale = Math.min(width / (bounds.width || 1), height / (bounds.height || 1)) * 0.7;
+    const offsetX = (width - bounds.width * scale) / 2 - bounds.minX * scale;
+    const offsetY = (height - bounds.height * scale) / 2 - bounds.minY * scale;
+
+    // Fixed hit radius in canvas pixels (generous for touch)
+    const hitRadius = Math.max(20, scale * 3);
+
+    let closestId: string | null = null;
+    let closestDist = Infinity;
+
+    // Check all valid locations
+    for (const loc of LOCATIONS) {
+      const pos = POSITIONS[loc.id];
+      if (!pos) continue;
+
+      // Convert to canvas coordinates (same as render)
+      const cx = pos.x * scale + offsetX;
+      const cy = pos.y * scale + offsetY;
+
+      // Simple distance
+      const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
+
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestId = loc.id;
       }
     }
 
-    if (found !== hoveredLoc) {
-      setHoveredLoc(found);
-      hoveredLocRef.current = found;
+    // Return closest if within hit radius
+    return closestDist <= hitRadius ? closestId : null;
+  };
+
+  // Unified handler for pointer/touch
+  const handleInteraction = (clientX: number, clientY: number) => {
+    const found = detectLocation(clientX, clientY);
+    // Always update both ref and state together
+    hoveredLocRef.current = found;
+    setHoveredLoc(found);
+  };
+
+  const clearHover = () => {
+    hoveredLocRef.current = null;
+    setHoveredLoc(null);
+  };
+
+  // Mouse handlers
+  const handleMouseMove = (e: React.MouseEvent) => {
+    handleInteraction(e.clientX, e.clientY);
+  };
+
+  const handleMouseLeave = () => {
+    clearHover();
+  };
+
+  // Touch handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    if (touch) {
+      handleInteraction(touch.clientX, touch.clientY);
     }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    if (touch) {
+      handleInteraction(touch.clientX, touch.clientY);
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    // Keep selection visible on mobile
+  };
+
+  const handleTouchCancel = () => {
+    clearHover();
   };
 
   const hoveredLocation = hoveredLoc ? LOCATIONS.find((l) => l.id === hoveredLoc) : null;
@@ -370,11 +447,13 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
         <canvas
           ref={canvasRef}
           onMouseMove={handleMouseMove}
-          onMouseLeave={() => {
-            setHoveredLoc(null);
-            hoveredLocRef.current = null;
-          }}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}
           className="h-full w-full"
+          style={{ touchAction: "pan-x pan-y" }}
         />
 
         {/* Mobile-only Location Tab - Overlay */}
@@ -408,9 +487,7 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
         <span className={`hidden md:inline ${hoveredLoc ? "text-white" : ""}`}>
           {hoveredLoc ? `STATUS_CONNECTED: ${hoveredLoc.toUpperCase()}` : "IDLE: WAITING FOR UPLINK"}
         </span>
-        <span className={`md:hidden ${hoveredLoc ? "text-white" : ""}`}>
-          {hoveredLoc ? "CONNECTED" : "IDLE"}
-        </span>
+        <span className={`md:hidden ${hoveredLoc ? "text-white" : ""}`}>{hoveredLoc ? "CONNECTED" : "IDLE"}</span>
       </footer>
     </div>
   );
