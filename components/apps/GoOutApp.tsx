@@ -376,24 +376,24 @@ const GoOutApp: React.FC<{ onHoverLocation?: (id: string | null) => void }> = ({
           }}
           className="h-full w-full"
         />
-      </div>
 
-      {/* Mobile-only Location Tab */}
-      <div
-        className={`md:hidden bg-black border-t border-gray-800 transition-all duration-200 overflow-hidden ${
-          hoveredLocation ? "max-h-40" : "max-h-0"
-        }`}>
-        {hoveredLocation && (
-          <div className="p-4">
-            <h1 className="text-lg font-light text-white mb-2 tracking-wide">{hoveredLocation.name}</h1>
-            <div className="flex gap-2 mb-3">
-              <span className="text-[8px] font-mono tracking-[0.1em] text-black bg-white px-2 py-0.5 uppercase">
-                {hoveredLocation.label}
-              </span>
+        {/* Mobile-only Location Tab - Overlay */}
+        <div
+          className={`md:hidden absolute bottom-10 left-0 right-0 bg-black border-t border-gray-800 transition-all duration-200 overflow-hidden z-50 ${
+            hoveredLocation ? "max-h-40 opacity-100 translate-y-0" : "max-h-0 opacity-0 translate-y-full"
+          }`}>
+          {hoveredLocation && (
+            <div className="p-4">
+              <h1 className="text-lg font-light text-white mb-2 tracking-wide">{hoveredLocation.name}</h1>
+              <div className="flex gap-2 mb-3">
+                <span className="text-[8px] font-mono tracking-[0.1em] text-black bg-white px-2 py-0.5 uppercase">
+                  {hoveredLocation.label}
+                </span>
+              </div>
+              <p className="text-[11px] text-gray-500 font-light leading-relaxed">{hoveredLocation.description}</p>
             </div>
-            <p className="text-[11px] text-gray-500 font-light leading-relaxed">{hoveredLocation.description}</p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       <footer className="h-10 bg-black border-t border-gray-800 px-5 flex items-center justify-between text-[10px] font-mono text-gray-500 tracking-widest uppercase flex-shrink-0">

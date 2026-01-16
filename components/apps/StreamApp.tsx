@@ -11,6 +11,7 @@ const StreamApp: React.FC = () => {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [viewers, setViewers] = useState(2345);
   const [day, setDay] = useState(4);
+  const [progress, setProgress] = useState(0);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const presetMessages = [
@@ -75,6 +76,24 @@ const StreamApp: React.FC = () => {
       clearTimeout(initialTimeout);
       clearInterval(viewerInterval);
     };
+  }, []);
+
+  // Animate progress bar from 0 to 100% over 3:23 (203 seconds)
+  useEffect(() => {
+    const duration = 203 * 1000; // 3 minutes 23 seconds in milliseconds
+    const startTime = Date.now();
+    
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = Math.min(100, (elapsed / duration) * 100);
+      setProgress(newProgress);
+      
+      if (newProgress >= 100) {
+        clearInterval(interval);
+      }
+    }, 100); // Update every 100ms for smooth animation
+    
+    return () => clearInterval(interval);
   }, []);
 
   // Hide scanlines when StreamApp is mounted
@@ -262,8 +281,9 @@ const StreamApp: React.FC = () => {
                     left: 0,
                     top: 0,
                     height: "100%",
-                    width: "30%",
+                    width: `${progress}%`,
                     backgroundColor: "#ff6b6b",
+                    transition: "width 0.1s linear",
                   }}
                 />
               </div>

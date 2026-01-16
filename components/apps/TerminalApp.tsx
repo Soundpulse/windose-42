@@ -12,7 +12,18 @@ const TerminalApp: React.FC<TerminalAppProps> = ({ onClose, onOpenLink }) => {
     'Type "help" for a list of available commands.',
   ]);
   const [input, setInput] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleCommand = (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,14 +129,23 @@ const TerminalApp: React.FC<TerminalAppProps> = ({ onClose, onOpenLink }) => {
         {history.map((line, i) => renderHistoryLine(line, i))}
         <div ref={bottomRef} />
       </div>
-      <form onSubmit={handleCommand} className="flex items-center border-t border-[#222] pt-2 flex-shrink-0">
+      <form
+        onSubmit={handleCommand}
+        className="flex items-center border-t border-[#222] pt-2 flex-shrink-0"
+        style={{ touchAction: "manipulation" }}>
         <span className="text-green-500 mr-2 text-xs md:text-sm whitespace-nowrap">guest@windose:~$</span>
         <input
+          ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="bg-transparent border-none outline-none flex-1 text-white text-xs md:text-sm min-w-0"
-          autoFocus
+          className="bg-transparent border-none outline-none flex-1 text-white min-w-0"
+          autoFocus={!isMobile}
+          style={{
+            touchAction: "manipulation",
+            fontSize: "16px", // 16px minimum to prevent iOS auto-zoom on mobile
+            WebkitAppearance: "none",
+          }}
         />
       </form>
     </div>

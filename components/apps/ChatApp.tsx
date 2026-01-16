@@ -372,16 +372,21 @@ const ChatApp: React.FC = () => {
         </div>
 
         {/* Input */}
-        <div className="p-4 bg-black/50 border-t border-gray-800">
-          <form onSubmit={handleSend} className="max-w-4xl mx-auto flex gap-3">
-            <div className="flex-1 relative">
+        <div className="p-4 bg-black/50 border-t border-gray-800" style={{ touchAction: "manipulation" }}>
+          <form onSubmit={handleSend} className="max-w-4xl mx-auto flex gap-3" style={{ touchAction: "manipulation" }}>
+            <div className="flex-1 relative" style={{ touchAction: "manipulation" }}>
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={`Message ${activePersona.name}...`}
                 disabled={isTyping}
-                className="w-full bg-black border border-gray-800 px-4 py-3 text-xs text-white font-mono tracking-wide placeholder:text-gray-700 focus:border-white focus:outline-none transition-all disabled:opacity-50"
+                className="w-full bg-black border border-gray-800 px-4 py-3 text-white font-mono tracking-wide placeholder:text-gray-700 focus:border-white focus:outline-none transition-all disabled:opacity-50"
+                style={{
+                  touchAction: "manipulation",
+                  fontSize: "16px", // 16px minimum to prevent iOS auto-zoom on mobile
+                  WebkitAppearance: "none",
+                }}
               />
               <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none opacity-20 hidden sm:block">
                 <span className="text-[8px] font-mono text-white">CMD_SHIFT_ENTER</span>
@@ -390,7 +395,8 @@ const ChatApp: React.FC = () => {
             <button
               type="submit"
               disabled={isTyping || !input.trim()}
-              className="bg-white text-black px-6 border border-white hover:invert transition-all flex items-center justify-center disabled:opacity-30 disabled:invert-0">
+              className="bg-white text-black px-6 border border-white hover:invert transition-all flex items-center justify-center disabled:opacity-30 disabled:invert-0"
+              style={{ touchAction: "manipulation" }}>
               <Send size={16} />
             </button>
           </form>
