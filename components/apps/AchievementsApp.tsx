@@ -75,6 +75,21 @@ const AchievementsApp: React.FC = () => {
             <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
 
             <div className="flex justify-between items-start mb-4">
+              <span className="text-[10px] text-gray-300">◆ 0x0C</span>
+              <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP PROGRAM</span>
+            </div>
+            <h3 className="text-lg font-light mb-2">MongoDB for Startups</h3>
+            <p className="text-xs text-white leading-relaxed uppercase tracking-tight">
+              Accepted into the MongoDB for Startups program.
+            </p>
+            <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2026.01.30</div>
+          </div>
+
+          <div className="group relative border border-gray-800 p-6 hover:border-white transition-colors bg-black/50 backdrop-blur-sm">
+            <div className="absolute -top-2 -left-2 w-4 h-4 border-l border-t border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-white opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <div className="flex justify-between items-start mb-4">
               <span className="text-[10px] text-gray-300">◆ 0x0B</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP PROGRAM</span>
             </div>
