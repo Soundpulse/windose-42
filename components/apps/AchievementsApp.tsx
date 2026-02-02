@@ -108,9 +108,9 @@ const AchievementsApp: React.FC = () => {
               <span className="text-[10px] text-gray-300">◆ 0x0B</span>
               <span className="text-[10px] px-2 py-0.5 border border-gray-600 text-white">STARTUP PROGRAM</span>
             </div>
-            <h3 className="text-lg font-light mb-2">Confluent for Startups</h3>
+            <h3 className="text-lg font-light mb-2">Confluent AI Accelerator Cohort-3</h3>
             <p className="text-xs text-white leading-relaxed uppercase tracking-tight">
-              Accepted into the Confluent for Startups program.
+              Accepted into the Confluent AI Accelerator.
             </p>
             <div className="mt-4 text-[9px] text-gray-600">TIMESTAMP: 2026.01.22</div>
           </div>
