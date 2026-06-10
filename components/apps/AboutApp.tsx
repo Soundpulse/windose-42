@@ -42,11 +42,10 @@ const AboutApp: React.FC = () => {
               <div className="text-white font-normal mb-1">Co-Founder & CTO, Taktora Inc.</div>
               <div className="text-[11px] text-gray-400 font-mono tracking-tight">2024.11 — PRESENT</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                AI copilot ("Cursor for factory scheduling") adapting production plans to real-time floor conditions.{" "}
-                <br />
-                MVP deployed to 2 factories ($40K ARR); Confluent AI Accelerator Cohort-3. Multi-agent scheduler
-                combining LLM agents with OR-Tools, fed by edge-deployed vision — cut weekly replanning from 5 hours to
-                30 minutes.
+                Co-founded an AI copilot ("Cursor for factory scheduling") that adapts production plans to real-time
+                floor conditions. Deployed the MVP to 2 factories ($40K ARR). Confluent AI Accelerator Cohort-3. <br />
+                Built a multi-agent scheduler that pairs LLM agents with OR-Tools and reads live floor data from edge
+                vision, cutting weekly replanning from 5 hours to 30 minutes.
               </div>
             </div>
           </div>
@@ -56,10 +55,10 @@ const AboutApp: React.FC = () => {
               <div className="text-white font-normal mb-1">Founder & Technical Lead, Webbit Tech</div>
               <div className="text-[11px] text-gray-400 font-mono tracking-tight">2022.10 — 2025.05</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                12-person digital studio delivering web platforms and analytics dashboards for Hovione, Galaxy
-                Entertainment Group, and Macau government agencies. <br />
-                Scaled to $400K+ ARR within 18 months across 20+ projects; shipped a ComfyUI/SDXL + LoRA pipeline
-                cutting asset turnaround from 3 days to 0.5 days.
+                Founded a 12-person digital studio that delivered web platforms and analytics dashboards for Hovione,
+                Galaxy Entertainment Group, and Macau government agencies. <br />
+                Scaled to $400K+ ARR within 18 months across 20+ projects. Shipped a ComfyUI/SDXL + LoRA pipeline that
+                cut asset turnaround from 3 days to 0.5 days.
               </div>
             </div>
           </div>
@@ -69,10 +68,10 @@ const AboutApp: React.FC = () => {
               <div className="text-white font-normal mb-1">Data Scientist, Rainbow Seven</div>
               <div className="text-[11px] text-gray-400 font-mono tracking-tight">2020.06 — 2022.10</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Automated data extraction and analytics with Python RPA on cron schedules, replacing bimonthly manual
+                Automated data extraction and analytics with scheduled Python RPA scripts, replacing bimonthly manual
                 IT requests with daily self-serve Power BI dashboards. <br />
-                Designed a headless promotional engine (micro-rewards, daily engagement cycles, leaderboards) — 25%+
-                revenue lift at 300%+ ROI across three campaigns.
+                Designed a headless promotional engine with micro-rewards, daily engagement cycles, and leaderboards
+                that lifted revenue 25%+ at 300%+ ROI across three campaigns.
               </div>
             </div>
           </div>

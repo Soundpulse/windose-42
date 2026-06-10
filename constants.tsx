@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
     title: "LoRA Style Transfer",
     description: "Parameter-efficient 3D style transfer on NeRF using LoRA. A+ Project (100/100).",
     longDescription:
-      "Parameter-efficient 3D style transfer method integrating LoRA adapters and CLIP embeddings into a modified LeRF/NeRF pipeline for efficient content-aware stylization. Achieved 10-25% higher PSNR with 16x fewer parameters and 5x less GPU memory than StyleRF and FPRF. Advised by Hadar Averbuch-Elor (Cornell) and Yu-Lun Liu (NYCU). Awarded A+ (100/100).",
+      "Parameter-efficient 3D style transfer method that integrates LoRA adapters and CLIP embeddings into a modified LeRF/NeRF pipeline for content-aware stylization. Achieved 10-25% higher PSNR with 16x fewer parameters and 5x less GPU memory than StyleRF and FPRF. Advised by Hadar Averbuch-Elor (Cornell) and Yu-Lun Liu (NYCU). Awarded A+ (100/100).",
     tech: ["Python", "PyTorch", "CUDA", "NeRF", "LoRA", "CLIP", "Nerfstudio"],
     link: "",
     image: "/lora_transfer/bnw.mp4",
@@ -168,7 +168,7 @@ export const PROJECTS: Project[] = [
     title: "Friday @ Taktora",
     description: "Real-time multimodal factory assistant with voice and vision, backed by RAG.",
     longDescription:
-      "A real-time multimodal factory assistant built with LiveKit, combining voice and vision on iPad. Backed by Retrieval-Augmented Generation (RAG) over machine manuals and SOPs as the context base, it replaces 10K+ page manual lookups with instant voice queries — letting operators identify problems and access procedures through natural language.",
+      "A real-time multimodal factory assistant built with LiveKit that combines voice and vision on iPad. Retrieval-Augmented Generation (RAG) over machine manuals and SOPs grounds each answer, so operators ask questions in natural language instead of searching 10K+ pages of manuals.",
     tech: ["LiveKit", "RAG", "LLM", "ASR", "TTS", "Vector DB", "Python"],
     link: "https://friday.taktora.ai",
     image: "/friday/friday_1.png",
@@ -217,7 +217,7 @@ export const PROJECTS: Project[] = [
     title: "Doctail.ai",
     description: "One-click MCP rollup platform for documentation. YC Top 10% Application.",
     longDescription:
-      "A one-click MCP rollup platform enabling developers to bundle multiple documentation sources into a single AI-queryable endpoint. Top 10% of Y Combinator applications. Onboarded 20 beta users and 5 enterprise pilots within 2 months, validated across 50+ developer interviews.",
+      "A one-click MCP rollup platform that lets developers bundle multiple documentation sources into a single AI-queryable endpoint. Ranked in the top 10% of Y Combinator applications. Onboarded 20 beta users and 5 enterprise pilots within 2 months and validated the product across 50+ developer interviews.",
     tech: ["Next.js", "PydanticAI", "FastMCP", "PostgreSQL", "LanceDB"],
     link: "https://doctail.ai",
     image: "/doctail/doctail_1.png",
@@ -233,7 +233,7 @@ export const PROJECTS: Project[] = [
     title: "Taktora.ai",
     description: "AI copilot ('Cursor for factory scheduling'). Deployed to 2 factories, $40K ARR.",
     longDescription:
-      "AI copilot that adapts production plans to real-time floor conditions. A multi-agent scheduler combines LLM agents with OR-Tools constraint solving, fed by edge-deployed vision streaming live counts and deviations — cutting weekly production replanning from 5 hours down to 30 minutes. MVP deployed to 2 factories ($40K ARR). Member of Confluent AI Accelerator Cohort-3.",
+      "AI copilot that adapts production plans to real-time floor conditions. The multi-agent scheduler pairs LLM agents with OR-Tools constraint solving and reads live counts and deviations from edge-deployed vision, cutting weekly production replanning from 5 hours to 30 minutes. Deployed the MVP to 2 factories ($40K ARR). Member of Confluent AI Accelerator Cohort-3.",
     tech: ["MongoDB", "Express", "React", "Postgres", "OR-Tools", "PydanticAI"],
     link: "https://taktora.ai",
     image: "/taktora/taktora_1.png",
@@ -249,7 +249,7 @@ export const PROJECTS: Project[] = [
     title: "ProPack Solutions",
     description: "Headless B2B packaging marketplace. 3.9K MAU within 3 months of launch.",
     longDescription:
-      "Full-stack headless B2B packaging marketplace with tiered pricing, custom quotations, and fulfillment flows — scaling to 3.9K MAU within 3 months of launch. Indexed and ranked 5.8K organic keywords through automated SEO infrastructure with a customized Hermes Agent.",
+      "Full-stack headless B2B packaging marketplace with tiered pricing, custom quotations, and fulfillment flows. Scaled to 3.9K MAU within 3 months of launch. Built automated SEO infrastructure with a customized Hermes Agent that indexed and ranked 5.8K organic keywords.",
     tech: ["Next.js", "TypeScript", "Redis", "PostgreSQL"],
     link: "https://propacks.net",
     image: "/propacks/landing.png",
