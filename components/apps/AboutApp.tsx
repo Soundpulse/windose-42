@@ -39,36 +39,40 @@ const AboutApp: React.FC = () => {
           <div className="flex gap-4">
             <div className="w-1 bg-white flex-shrink-0" />
             <div>
-              <div className="text-white font-normal mb-1">Founder & CTO, Taktora Inc.</div>
+              <div className="text-white font-normal mb-1">Co-Founder & CTO, Taktora Inc.</div>
               <div className="text-[11px] text-gray-400 font-mono tracking-tight">2024.11 — PRESENT</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Adaptive scheduler for high-SKU CPG manufacturing. <br />
-                Deterministic engine translating plain language intent into rules; reshuffling queues and surfacing
-                tradeoffs for human-system reasoning.
+                AI copilot ("Cursor for factory scheduling") adapting production plans to real-time floor conditions.{" "}
+                <br />
+                MVP deployed to 2 factories ($40K ARR); Confluent AI Accelerator Cohort-3. Multi-agent scheduler
+                combining LLM agents with OR-Tools, fed by edge-deployed vision — cut weekly replanning from 5 hours to
+                30 minutes.
               </div>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-1 bg-white opacity-60 flex-shrink-0" />
             <div>
-              <div className="text-white font-normal mb-1">Founder & General Manager, Webbit Tech</div>
-              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2022.10 — 2025.04</div>
+              <div className="text-white font-normal mb-1">Founder & Technical Lead, Webbit Tech</div>
+              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2022.10 — 2025.05</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                AI digital transformation and design services. <br />
-                Steered team of 12 to 3M+ HKD revenue in 2024. Reduced integration time by 40% while raising quality
-                metrics by 25% via AI-driven pipelines. (90%+ SAT)
+                12-person digital studio delivering web platforms and analytics dashboards for Hovione, Galaxy
+                Entertainment Group, and Macau government agencies. <br />
+                Scaled to $400K+ ARR within 18 months across 20+ projects; shipped a ComfyUI/SDXL + LoRA pipeline
+                cutting asset turnaround from 3 days to 0.5 days.
               </div>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-1 bg-white opacity-40 flex-shrink-0" />
             <div>
-              <div className="text-white font-normal mb-1">Senior Data Analyst, Rainbow Seven</div>
+              <div className="text-white font-normal mb-1">Data Scientist, Rainbow Seven</div>
               <div className="text-[11px] text-gray-400 font-mono tracking-tight">2020.06 — 2022.10</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Big data analysis and RPA tools for data operations. <br />
-                Raised company processing efficiency by 300% through statistical interpretation and automated global
-                trend reporting.
+                Automated data extraction and analytics with Python RPA on cron schedules, replacing bimonthly manual
+                IT requests with daily self-serve Power BI dashboards. <br />
+                Designed a headless promotional engine (micro-rewards, daily engagement cycles, leaderboards) — 25%+
+                revenue lift at 300%+ ROI across three campaigns.
               </div>
             </div>
           </div>

@@ -41,10 +41,15 @@ You are a technical peer that talks about technology, programming languages, fra
 ### AI & Machine Learning
 
 - **Gemini**: Google's AI model (primary LLM)
+- **PydanticAI**: Multi-agent LLM systems (used at Taktora and Doctail)
+- **OR-Tools**: Constraint solving, combined with LLM agents for scheduling
+- **LiveKit**: Real-time multimodal voice + vision agents
+- **FastMCP**: MCP server tooling (powers Doctail.ai)
 - **LangChain**: LLM application framework
 - **RAG**: Retrieval-Augmented Generation architectures
-- **Vector DB**: Vector databases for embeddings
+- **Vector DB**: Vector databases for embeddings (LanceDB)
 - **LoRA**: Low-Rank Adaptation for model fine-tuning
+- **ComfyUI / SDXL**: Generative image pipelines for production assets
 - **PyTorch**: Deep learning framework
 - **CUDA**: GPU acceleration
 

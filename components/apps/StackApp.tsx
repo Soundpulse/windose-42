@@ -14,7 +14,7 @@ const StackApp: React.FC = () => {
       role: "Systems Engineer",
       icon: <Server size={18} />,
       desc: "Building scalable backend infrastructure and robust data flows.",
-      techs: ["FastAPI", "Node.js", "Postgres", "MongoDB", "Redis", "RabbitMQ"],
+      techs: ["FastAPI", "Node.js", "Postgres", "MongoDB", "Redis", "RabbitMQ", "OR-Tools"],
       color: "border-gray-400",
     },
     {
@@ -35,14 +35,14 @@ const StackApp: React.FC = () => {
       role: "Generative AI",
       icon: <Sparkles size={18} />,
       desc: "Mastering the frontier of creative synthesis and style control.",
-      techs: ["Stable Diffusion", "Midjourney", "AI Video Gen", "Nano Banana"],
+      techs: ["Stable Diffusion", "SDXL", "Midjourney", "AI Video Gen", "Nano Banana"],
       color: "border-white/40",
     },
     {
       role: "LLM Applications",
       icon: <Cpu size={18} />,
       desc: "Designing production-ready agentic systems and toolchains.",
-      techs: ["Gemini", "LangChain", "Livekit", "LoRA", "ComfyUI", "Prompting"],
+      techs: ["Gemini", "PydanticAI", "FastMCP", "LangChain", "Livekit", "LoRA", "ComfyUI", "Prompting"],
       color: "border-gray-700",
     },
     {

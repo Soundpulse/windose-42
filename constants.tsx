@@ -17,7 +17,7 @@ import { Project, WindowState } from "./types";
 
 export const INITIAL_WINDOWS: WindowState[] = [
   { id: "about", title: "About.md", isOpen: true, isMinimized: false, zIndex: 110, icon: <User size={14} /> },
-  { id: "projects", title: "Projects", isOpen: false, isMinimized: false, zIndex: 101, icon: <Folder size={14} /> },
+  { id: "projects", title: "Projects", isOpen: true, isMinimized: false, zIndex: 108, icon: <Folder size={14} /> },
   { id: "terminal", title: "Terminal", isOpen: false, isMinimized: false, zIndex: 101, icon: <Terminal size={14} /> },
   { id: "stats", title: "System", isOpen: true, isMinimized: false, zIndex: 105, icon: <Activity size={14} /> },
   {
@@ -148,10 +148,10 @@ export const PROJECTS: Project[] = [
   {
     id: "lora_transfer",
     title: "LoRA Style Transfer",
-    description: "3D style transfer across NeRF scenes using LoRA. A+ Project (100/100).",
+    description: "Parameter-efficient 3D style transfer on NeRF using LoRA. A+ Project (100/100).",
     longDescription:
-      "Research project implementing style transfer on Neural Radiance Fields using Low-Rank Adaptation (LoRA). Enables efficient artistic style transformation of 3D scenes including black & white, saturation adjustments, negative effects, and mixed styles—all while preserving scene geometry and consistency. Awarded A+ (100/100).",
-    tech: ["Python", "PyTorch", "CUDA", "NeRF", "LoRA", "Nerfstudio"],
+      "Parameter-efficient 3D style transfer method integrating LoRA adapters and CLIP embeddings into a modified LeRF/NeRF pipeline for efficient content-aware stylization. Achieved 10-25% higher PSNR with 16x fewer parameters and 5x less GPU memory than StyleRF and FPRF. Advised by Hadar Averbuch-Elor (Cornell) and Yu-Lun Liu (NYCU). Awarded A+ (100/100).",
+    tech: ["Python", "PyTorch", "CUDA", "NeRF", "LoRA", "CLIP", "Nerfstudio"],
     link: "",
     image: "/lora_transfer/bnw.mp4",
     media: [
@@ -166,10 +166,10 @@ export const PROJECTS: Project[] = [
   {
     id: "friday",
     title: "Friday @ Taktora",
-    description: "AI-powered car manual diagnostics using RAG and ASR-LLM-TTS flow.",
+    description: "Real-time multimodal factory assistant with voice and vision, backed by RAG.",
     longDescription:
-      "An intelligent automotive diagnostics system that leverages Retrieval-Augmented Generation (RAG) to query car manuals and diagnostic information. Uses ASR-LLM-TTS (Automatic Speech Recognition, Large Language Model, Text-to-Speech) pipeline to process vehicle issues, retrieve relevant manual sections, and provide audio-guided diagnostic assistance. Enables mechanics and car owners to quickly identify problems and access repair information through natural language queries.",
-    tech: ["RAG", "LLM", "TTS", "Vector DB", "Python", "ASR"],
+      "A real-time multimodal factory assistant built with LiveKit, combining voice and vision on iPad. Backed by Retrieval-Augmented Generation (RAG) over machine manuals and SOPs as the context base, it replaces 10K+ page manual lookups with instant voice queries — letting operators identify problems and access procedures through natural language.",
+    tech: ["LiveKit", "RAG", "LLM", "ASR", "TTS", "Vector DB", "Python"],
     link: "https://friday.taktora.ai",
     image: "/friday/friday_1.png",
     media: [
@@ -215,10 +215,10 @@ export const PROJECTS: Project[] = [
   {
     id: "doctail",
     title: "Doctail.ai",
-    description: "AI-powered documentation assistant for developers. YC Top 10% Application.",
+    description: "One-click MCP rollup platform for documentation. YC Top 10% Application.",
     longDescription:
-      "A containerized documentation tool that provides context-aware search and automatic documentation generation using only libraries relevant to your repository. Tailored to your specific codebase dependencies for precise, repository-focused documentation assistance.",
-    tech: ["FastMCP", "Docker", "OpenAI", "MongoDB", "Express", "React", "Postgres"],
+      "A one-click MCP rollup platform enabling developers to bundle multiple documentation sources into a single AI-queryable endpoint. Top 10% of Y Combinator applications. Onboarded 20 beta users and 5 enterprise pilots within 2 months, validated across 50+ developer interviews.",
+    tech: ["Next.js", "PydanticAI", "FastMCP", "PostgreSQL", "LanceDB"],
     link: "https://doctail.ai",
     image: "/doctail/doctail_1.png",
     media: [
@@ -231,10 +231,10 @@ export const PROJECTS: Project[] = [
   {
     id: "taktora",
     title: "Taktora.ai",
-    description: "Production scheduling and planning system for manufacturing.",
+    description: "AI copilot ('Cursor for factory scheduling'). Deployed to 2 factories, $40K ARR.",
     longDescription:
-      "Enterprise-grade production scheduling platform for beverage manufacturing. Features multi-line scheduling with changeover time calculations, backlog management, due date tracking, and real-time progress monitoring.",
-    tech: ["MongoDB", "Express", "React", "Postgres", "CP-SAT", "PydanticAI"],
+      "AI copilot that adapts production plans to real-time floor conditions. A multi-agent scheduler combines LLM agents with OR-Tools constraint solving, fed by edge-deployed vision streaming live counts and deviations — cutting weekly production replanning from 5 hours down to 30 minutes. MVP deployed to 2 factories ($40K ARR). Member of Confluent AI Accelerator Cohort-3.",
+    tech: ["MongoDB", "Express", "React", "Postgres", "OR-Tools", "PydanticAI"],
     link: "https://taktora.ai",
     image: "/taktora/taktora_1.png",
     media: [
@@ -247,10 +247,10 @@ export const PROJECTS: Project[] = [
   {
     id: "propacks",
     title: "ProPack Solutions",
-    description: "E-commerce platform for sustainable packaging solutions.",
+    description: "Headless B2B packaging marketplace. 3.9K MAU within 3 months of launch.",
     longDescription:
-      "Full-featured B2B e-commerce platform for sustainable PCR (post-consumer recycled) plastic packaging. Includes product catalog, inventory management, quote requests, and order processing. Clean, eco-friendly design emphasizing the company's commitment to sustainability.",
-    tech: ["MongoDB", "Express", "React", "Postgres", "Stripe"],
+      "Full-stack headless B2B packaging marketplace with tiered pricing, custom quotations, and fulfillment flows — scaling to 3.9K MAU within 3 months of launch. Indexed and ranked 5.8K organic keywords through automated SEO infrastructure with a customized Hermes Agent.",
+    tech: ["Next.js", "TypeScript", "Redis", "PostgreSQL"],
     link: "https://propacks.net",
     image: "/propacks/landing.png",
     media: [
