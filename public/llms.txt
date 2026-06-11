@@ -107,6 +107,7 @@ Research papers and academic work:
 - Team Size: Flexible - from solo projects to large teams
 
 ## Contact & Links
+- CV (PDF): https://tobyio.com/cv.pdf
 - Website: https://tobyio.com/
 - GitHub: Available through the site
 - Social links: Available through the site
