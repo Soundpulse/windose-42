@@ -39,62 +39,53 @@ const AboutApp: React.FC = () => {
           <div className="flex gap-4">
             <div className="w-1 bg-white flex-shrink-0" />
             <div>
-              <div className="text-white font-normal mb-1">Co-Founder & CTO, Taktora Inc.</div>
-              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2024.11 — PRESENT</div>
+              <div className="text-white font-normal mb-1">
+                Forward Deployed Engineer,{" "}
+                <a href="https://taktora.ai" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+                  Taktora Inc.
+                </a>
+              </div>
+              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2025.05 — 2026.05 · LOS ANGELES, CA</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Co-founded an AI copilot ("Cursor for factory scheduling") that adapts production plans to real-time
-                floor conditions. Deployed the MVP to 2 factories ($40K ARR). Confluent AI Accelerator Cohort-3. <br />
-                Built a multi-agent scheduler that pairs LLM agents with OR-Tools and reads live floor data from edge
-                vision, cutting weekly replanning from 5 hours to 30 minutes.
+                Built a multi-agent scheduler combining LLM agents with OR-Tools constraint solving, fed by
+                edge-deployed vision streaming live counts and deviations. Deployed the MVP to 2 factories in California
+                and cut weekly production replanning from 5 hours down to 30 minutes. <br />
+                Deployed a real-time multimodal assistant (LiveKit, voice + vision on iPad) with RAG over machine
+                manuals and SOPs, enabling non-technical floor operators to replace 10K+ page manual lookups with
+                hands-free voice queries.
               </div>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-1 bg-white opacity-60 flex-shrink-0" />
             <div>
-              <div className="text-white font-normal mb-1">Founder & Technical Lead, Webbit Tech</div>
-              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2022.10 — 2025.05</div>
+              <div className="text-white font-normal mb-1">
+                Founder & Technical Lead,{" "}
+                <a href="https://chat.webbit-tech.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+                  Webbit Tech
+                </a>
+              </div>
+              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2023.06 — 2024.09 · MACAU</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Founded a 12-person digital studio that delivered web platforms and analytics dashboards for Hovione,
-                Galaxy Entertainment Group, and Macau government agencies. <br />
-                Scaled to $400K+ ARR within 18 months across 20+ projects. Shipped a ComfyUI/SDXL + LoRA pipeline that
-                cut asset turnaround from 3 days to 0.5 days.
+                Led technical delivery of 20+ web platforms, analytics dashboards, and AI pipelines to enterprise
+                clients including Hovione, Macau government agencies & various local and overseas Small and
+                Medium-sized Enterprises. <br />
+                Shipped a ComfyUI-based generative image pipeline using SDXL and custom LoRA fine-tuning to produce
+                game assets and e-commerce product visuals, reducing asset turnaround from 3 days to 0.5 days. <br />
+                Managed client engagements end to end, including SLA authoring and compliance reviews against each
+                client’s own standards (pharma, gaming, government), scaling the team to 12 and HK$3M ARR in 12 months.
               </div>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-1 bg-white opacity-40 flex-shrink-0" />
             <div>
-              <div className="text-white font-normal mb-1">Data Scientist, Rainbow Seven</div>
-              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2020.06 — 2022.10</div>
+              <div className="text-white font-normal mb-1">Data Scientist, Rainbow Seven Company Ltd.</div>
+              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2020.06 — 2024.01 · MACAU</div>
               <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Automated data extraction and analytics with scheduled Python RPA scripts, replacing bimonthly manual
-                IT requests with daily self-serve Power BI dashboards. <br />
-                Designed a headless promotional engine with micro-rewards, daily engagement cycles, and leaderboards
-                that lifted revenue 25%+ at 300%+ ROI across three campaigns.
-              </div>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div className="w-1 bg-white opacity-20 flex-shrink-0" />
-            <div>
-              <div className="text-white font-normal mb-1">Full-stack Developer, Giant Whale</div>
-              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2020.11 — 2021.11</div>
-              <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Multi-platform online tutoring and training application. <br />
-                Delivered secure, high-performance training services for the Macau student market in an agile scrum
-                environment.
-              </div>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div className="w-1 bg-white opacity-10 flex-shrink-0" />
-            <div>
-              <div className="text-white font-normal mb-1">Mathematics Tutor, Kumon UK</div>
-              <div className="text-[11px] text-gray-400 font-mono tracking-tight">2018.07 — 2018.09</div>
-              <div className="text-[10px] text-white mt-2 leading-relaxed">
-                Mathematical concepts teaching. Developed customized approaches for individual comprehension and
-                progress.
+                Cut reporting from every two months to daily by consolidating 30+ one-off SQL queries into a single
+                Python RPA extraction over a 40-table custom backend, feeding Power BI dashboards leadership could
+                filter and drill on demand.
               </div>
             </div>
           </div>

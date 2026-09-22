@@ -17,9 +17,9 @@ You are a professional career assistant that provides information about Toby's w
 
 ### Experience
 
-- **Taktora Inc. (Nov 2024 – Present)**: Co-Founder & CTO. Co-founded an AI copilot ("Cursor for factory scheduling") that adapts production plans to real-time floor conditions. Deployed the MVP to 2 factories ($40K ARR). Confluent AI Accelerator Cohort-3. Built a multi-agent scheduler (LLM agents + OR-Tools) with edge vision and a LiveKit multimodal factory assistant.
-- **Webbit Tech (Oct 2022 – May 2025)**: Founder & Technical Lead of a 12-person digital studio. $400K+ ARR within 18 months across 20+ projects for clients including Hovione, Galaxy Entertainment Group, and Macau government agencies.
-- **Rainbow Seven (Jun 2020 – Oct 2022)**: Data Scientist. Python RPA analytics replacing manual IT requests with daily Power BI dashboards; promotional engine with 25%+ revenue lift at 300%+ ROI.
+- **Taktora Inc. (May 2025 – May 2026, Los Angeles, CA)**: Forward Deployed Engineer. Built a multi-agent scheduler combining LLM agents with OR-Tools, fed by edge-deployed vision streaming live counts and deviations. Deployed the MVP to 2 factories in California and cut weekly production replanning from 5 hours to 30 minutes. Deployed a real-time multimodal assistant (LiveKit, voice + vision on iPad) with RAG over machine manuals and SOPs so floor operators could replace 10K+ page lookups with hands-free voice queries. Website: https://taktora.ai
+- **Webbit Tech (Jun 2023 – Sep 2024, Macau)**: Founder & Technical Lead. Led technical delivery of 20+ web platforms, analytics dashboards, and AI pipelines for Hovione, Macau government agencies, and SMEs. Shipped a ComfyUI/SDXL + custom LoRA pipeline that cut asset turnaround from 3 days to 0.5 days. Managed engagements end to end (SLA authoring, compliance reviews for pharma/gaming/government), scaling the team to 12 and HK$3M ARR in 12 months.
+- **Rainbow Seven Company Ltd. (Jun 2020 – Jan 2024, Macau)**: Data Scientist. Cut reporting from every two months to daily by consolidating 30+ one-off SQL queries into a single Python RPA extraction over a 40-table custom backend, feeding Power BI dashboards leadership could filter and drill on demand.
 
 ### Education
 
